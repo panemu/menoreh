@@ -1,0 +1,19 @@
+name: domain
+description: A new Flutter package project.
+version: 0.0.1
+publish_to: 'none'
+
+environment:
+  sdk: '>=2.18.2 <3.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  # packages local
+  data:
+    path: ../data
+
+  dartz: ^0.10.1
+  equatable: ^2.0.5
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
