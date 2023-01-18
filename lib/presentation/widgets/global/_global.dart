@@ -9,3 +9,5 @@ export 'sidebar_custom/_sidebar_custom.dart';
 export 'chip_widget.dart';
 export 'tab_indicator.dart';
 export 'image_view_widget.dart';
+export 'clickable_image_widget.dart';
+export 'custom_loading_widget.dart';

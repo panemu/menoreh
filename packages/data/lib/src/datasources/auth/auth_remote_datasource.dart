@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:domain/domain.dart';
 import 'package:data/data.dart';
 
@@ -9,6 +7,9 @@ abstract class AuthRemoteDatasource {
 
   /// Register with email and password
   Future<AuthUserEntity> postRegisterCredentials(AuthParamsEntity params);
+
+  /// Register with email and password
+  Future<bool> logout();
 }
 
 class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
@@ -21,9 +22,12 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     try {
       final data = await baseApi.postLogin(LOGIN, data: params.toJson());
       return AuthUserModel.toJson(data);
-    } catch (e, s) {
-      log(e.toString(), stackTrace: s);
-      throw AuthException(message: EXCEPTION_WRONG);
+    } catch (e) {
+      if(e is AuthException) {
+        throw AuthException(message: e.message);
+      }else {
+        throw AuthException(message: EXCEPTION_WRONG);
+      }
     }
   }
 
@@ -31,5 +35,11 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   Future<AuthUserEntity> postRegisterCredentials(AuthParamsEntity params) {
     //TODO: implement postRegisterCredentials
     throw UnimplementedError();
+  }
+  
+  @override
+  Future<bool> logout() async {
+    await baseApi.post(LOGOUT);
+    return true;
   }
 }

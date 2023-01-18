@@ -74,7 +74,7 @@ class RowTableUser extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          CacheImageWidget(imageUrl: avatarUrl, size: Size(AppDimens.size2L, AppDimens.size2L)),
+          ClickableImageWidget(imageUrl: avatarUrl, size: Size(AppDimens.size2L, AppDimens.size2L)),
           SizedBox(width: AppDimens.size2S),
           SelectableText(value, style: const TextStyle(overflow: TextOverflow.ellipsis)),
         ],

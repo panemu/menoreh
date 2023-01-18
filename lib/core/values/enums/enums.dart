@@ -19,5 +19,11 @@ enum ResponsiveType { mobile, tablet, desktop }
 /// for Text field Row [TextFieldRow] params
 enum FieldType { basic, dropdown }
 
-/// condition of state
+/// condition of authentication
+enum AuthState { initial, loading, loggedIn, notLoggedIn }
+
+/// condition of load data
 enum TypeState { initial, loading, loaded, notLoaded }
+
+/// state of dialog
+enum AnswerState { cancel, yesOk, third }

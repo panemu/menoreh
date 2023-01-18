@@ -27,7 +27,7 @@ class AppDimens {
   /// 16
   static const double radiusLarge = 16.0;
   /// 20
-  static const double radiusLargeX = 16.0;
+  static const double radiusLargeX = 20.0;
 
   //! commons sizing
   /// 0
@@ -124,4 +124,6 @@ class AppDimens {
   static const double widthFieldRow = 160.0;
   /// 292.0
   static const double widthDetailProfile = 292.0;
+  /// 400
+  static const double widthLoading = 400.0;
 }

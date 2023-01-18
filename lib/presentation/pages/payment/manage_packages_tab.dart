@@ -43,8 +43,8 @@ class _ManagePackagesTabState extends State<ManagePackagesTab> {
             context: context,
             title: 'Export daftar paket',
             description: 'Unduh atau export ke file dokumen excel.',
-            submitted: 'Export',
-            onSubmitted: () {},
+            // submitted: 'Export',
+            // onSubmitted: () {},
           ),
         ),
         Expanded(
@@ -81,9 +81,9 @@ class _ManagePackagesTabState extends State<ManagePackagesTab> {
                     context: context,
                     title: 'Hapus paket',
                     description: 'Apakah anda yakin ingin menghapus paket ini?',
-                    submittedColor: AppColors.red,
-                    submitted: 'Hapus',
-                    onSubmitted: () {},
+                    // submittedColor: AppColors.red,
+                    // submitted: 'Hapus',
+                    // onSubmitted: () {},
                   ),
                   onEdit: () {},
                 );

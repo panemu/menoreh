@@ -4,14 +4,14 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:menoreh_library/core/_core.dart';
 import 'package:menoreh_library/presentation/_presentation.dart';
 
-class ListCardTab extends StatefulWidget {
-  const ListCardTab({Key? key}) : super(key: key);
+class CountryTab extends StatefulWidget {
+  const CountryTab({Key? key}) : super(key: key);
 
   @override
-  State<ListCardTab> createState() => _ListCardTabState();
+  State<CountryTab> createState() => _ListCardTabState();
 }
 
-class _ListCardTabState extends State<ListCardTab> {
+class _ListCardTabState extends State<CountryTab> {
   final int _rowsPerPage = 15;
   late CardDataGridSource cardDataSource;
 
@@ -81,8 +81,8 @@ class _ListCardTabState extends State<ListCardTab> {
             context: context,
             title: 'Export daftar kartu',
             description: 'Unduh atau export ke file dokumen excel.',
-            submitted: 'Export',
-            onSubmitted: () {},
+            // submitted: 'Export',
+            // onSubmitted: () {},
           ),
         ),
         Expanded(
@@ -171,9 +171,9 @@ class _ListCardTabState extends State<ListCardTab> {
                     context: context,
                     title: 'Hapus kartu',
                     description: 'Apakah anda yakin ingin menghapus kartu ini?',
-                    submittedColor: AppColors.red,
-                    submitted: 'Hapus',
-                    onSubmitted: () {},
+                    // submittedColor: AppColors.red,
+                    // submitted: 'Hapus',
+                    // onSubmitted: () {},
                   ),
                   onEdit: () {},
                 );

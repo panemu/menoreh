@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menoreh_library/core/_core.dart';
 
-class TextFieldEmail extends StatelessWidget {
+class TextFieldUsername extends StatelessWidget {
   final TextEditingController? controller;
   final String? title;
   final String hint;
@@ -18,7 +18,7 @@ class TextFieldEmail extends StatelessWidget {
   final int? maxLength;
   final String? errorText;
 
-  const TextFieldEmail({
+  const TextFieldUsername({
     Key? key,
     this.title,
     required this.hint,
@@ -55,8 +55,8 @@ class TextFieldEmail extends StatelessWidget {
             controller: controller,
             focusNode: focusNode,
             initialValue: initialValue,
-            keyboardType: TextInputType.name,
-            style: TextStyle(color: AppColors.grey.shade300),
+            keyboardType: TextInputType.text,
+            style: const TextStyle(color: AppColors.white),
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: AppColors.grey.shade300, width: 1),
@@ -80,6 +80,7 @@ class TextFieldEmail extends StatelessWidget {
               hintText: hint,
               hintStyle: TextStyle(color: AppColors.grey.shade300),
               contentPadding: const EdgeInsets.all(AppDimens.paddingMedium),
+              prefixIcon: Icon(Icons.person_outline_outlined, size: AppDimens.sizeL, color: AppColors.grey.shade200),
             ),
             enabled: enabled,
             maxLines: multiline ? 4 : 1,

@@ -4,8 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:menoreh_library/core/_core.dart';
 import 'package:menoreh_library/injections.dart';
 
-class TitleLogin extends StatelessWidget {
-  const TitleLogin({Key? key}) : super(key: key);
+class TopLogin extends StatelessWidget {
+  const TopLogin({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +14,10 @@ class TitleLogin extends StatelessWidget {
       children: [
         SvgPicture.asset(
           AppImages.logoSvg,
-          width: AppDimens.imageAvatarMobile.width,
-          height: AppDimens.imageAvatarMobile.height,
+          width: AppDimens.imageAvatar.width,
+          height: AppDimens.imageAvatar.height,
         ),
-        SizedBox(height: AppDimens.size4M),
+        SizedBox(height: AppDimens.size3M),
         Text('Masuk ke ${sl<FlavorConfig>().values!.appName}', textAlign: TextAlign.center, style: AppTextStyle.titleLoginPage),
         SizedBox(height: AppDimens.size3S),
         Text(

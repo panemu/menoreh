@@ -2,6 +2,7 @@
 
 //! API Path
 const String LOGIN = 'auth/login';
+const String LOGOUT = 'auth/logout';
 
 //! Hive BOX
 const String BOX_LOGIN = 'box_login';

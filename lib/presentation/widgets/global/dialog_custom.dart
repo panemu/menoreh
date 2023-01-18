@@ -7,47 +7,58 @@ import 'package:menoreh_library/presentation/_presentation.dart';
 class AppDialog {
   AppDialog._();
 
-  static Future<T?> confirm<T>({
+  static Future<AnswerState?> handleError(
+    BuildContext context,
+    String error, [
+    StackTrace? stackTrace,
+  ]) =>
+      confirm(
+        context: context,
+        title: "Error",
+        description: error,
+        labelCancel: '',
+      );
+
+  static Future<AnswerState?> confirm({
     required BuildContext context,
-    required String title,
+    String? title = 'Info',
     String? description,
     Widget? content,
     bool? isDismiss = true,
-    String? submitted = 'Simpan',
-    Color? submittedColor,
-    String? back = 'Batal',
-    List<Widget>? button,
-    VoidCallback? onSubmitted,
-    VoidCallback? onBack,
+    String? labelYesOk = 'Ok',
+    String? labelCancel = 'Batal',
+    Color? colorYesOk,
   }) {
     late List<Widget> structure = [];
     late List<Widget> action = [];
 
-    structure.addAll([Text(title, style: AppTextStyle.dialogTitle), SizedBox(height: AppDimens.size3S)]);
+    structure.addAll([Text(title!, style: AppTextStyle.dialogTitle), SizedBox(height: AppDimens.size3S)]);
     if (description != null) structure.add(Text(description, style: AppTextStyle.dialogDesc));
     if (content != null) structure.addAll([SizedBox(height: AppDimens.sizeL), content]);
 
-    action.addAll([
-      ElevatedButton(
-        onPressed: () {
-          context.router.pop();
-          onBack!.call();
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.fillTertiary,
-          foregroundColor: AppColors.labelSecondary,
+    if (labelCancel!.isNotEmpty) {
+      action.add(
+        ElevatedButton(
+          onPressed: () => context.router.pop<AnswerState>(AnswerState.cancel),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.fillTertiary,
+            foregroundColor: AppColors.labelSecondary,
+          ),
+          child: Text(labelCancel),
         ),
-        child: Text(back!),
-      ),
+      );
+    }
+
+    action.addAll([
       SizedBox(width: AppDimens.size2M),
       ElevatedButton(
-        onPressed: () => onSubmitted!.call(),
-        style: ElevatedButton.styleFrom(backgroundColor: submittedColor ?? AppColors.primary),
-        child: Text(submitted!),
+        onPressed: () => context.router.pop<AnswerState>(AnswerState.yesOk),
+        style: ElevatedButton.styleFrom(backgroundColor: colorYesOk ?? AppColors.primary),
+        child: Text(labelYesOk!),
       ),
     ]);
 
-    return showDialog<T>(
+    return showDialog<AnswerState>(
       context: context,
       barrierDismissible: isDismiss!,
       builder: (context) {
@@ -349,7 +360,7 @@ class AppDialog {
         SizedBox(
           width: AppDimens.imageAvatarMobile.width,
           height: AppDimens.imageAvatarMobile.height,
-          child: CacheImageWidget(
+          child: ClickableImageWidget(
             imageUrl: imageUrl,
             radius: AppDimens.radiusLargeX,
             size: AppDimens.imageAvatarMobile,
@@ -428,7 +439,7 @@ class AppDialog {
                               if (imageUrl != null)
                                 Offstage(
                                   offstage: context.isPhone,
-                                  child: CacheImageWidget(
+                                  child: ClickableImageWidget(
                                     imageUrl: imageUrl,
                                     radius: AppDimens.radiusLargeX,
                                     size: AppDimens.imageAvatar,

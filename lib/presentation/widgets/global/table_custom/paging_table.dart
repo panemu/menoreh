@@ -10,15 +10,11 @@ class PagingTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: AppDimens.pagingHeight,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingLarge),
-        alignment: Alignment.center,
-        child: SfDataPager(
-          delegate: source,
-          pageCount: pageCount,
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(left: AppDimens.paddingLarge, right: AppDimens.paddingSmall),
+      child: SfDataPager(
+        delegate: source,
+        pageCount: pageCount,
       ),
     );
   }

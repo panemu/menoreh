@@ -62,7 +62,7 @@ class _TextFieldPasswordState extends State<TextFieldPassword> {
             focusNode: widget.focusNode,
             initialValue: widget.initialValue,
             keyboardType: TextInputType.visiblePassword,
-            style: TextStyle(color: AppColors.grey.shade300),
+            style: const TextStyle(color: AppColors.white),
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: AppColors.grey.shade300, width: 1),
@@ -85,10 +85,11 @@ class _TextFieldPasswordState extends State<TextFieldPassword> {
               hintText: widget.hint,
               hintStyle: TextStyle(color: AppColors.grey.shade300),
               contentPadding: const EdgeInsets.all(AppDimens.paddingMedium),
+              prefixIcon: Icon(Icons.lock_outline_rounded, size: AppDimens.sizeL, color: AppColors.grey.shade200),
               suffixIcon: IconButton(
                 onPressed: () => setState(() => _isVisible = !_isVisible),
                 icon: Icon(_isVisible ? Icons.visibility : Icons.visibility_off_outlined),
-                color: AppColors.grey.shade300,
+                color: AppColors.grey.shade200,
               ),
             ),
             enabled: widget.enabled,

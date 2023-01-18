@@ -3,6 +3,8 @@ import 'package:domain/domain.dart';
 import 'package:get_it/get_it.dart';
 import 'package:menoreh_library/presentation/_presentation.dart';
 
+import 'presentation/routers/auth_guard.dart';
+
 /// Injection instance e.g, `sl<FlavorConfig>().name;`
 final sl = GetIt.instance;
 
@@ -26,12 +28,17 @@ void _external(FlavorConfig flavor) {
   sl.registerSingleton<FlavorConfig>(flavor);
   // Base Api
   sl.registerSingleton(BaseApi(flavor));
+  // Auth route
+  sl.registerFactory<AuthGuard>(() => AuthGuard(sl()));
 }
 
 void _bloc() {
   // Login
   sl.registerFactory<LoginCubit>(() => LoginCubit(sl()));
   sl.registerFactory<CheckLoginCubit>(() => CheckLoginCubit(sl()));
+  sl.registerFactory<UserInfoCubit>(() => UserInfoCubit(sl()));
+  // Logout
+  sl.registerFactory<LogoutCubit>(() => LogoutCubit(sl()));
 }
 
 void _useCase() {

@@ -45,10 +45,10 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-    CardRoute.name: (routeData) {
+    WorldRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const CardPage(),
+        child: const WorldPage(),
         transitionsBuilder: TransitionsBuilders.noTransition,
         opaque: true,
         barrierDismissible: false,
@@ -72,28 +72,19 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-    ListCardRoute.name: (routeData) {
+    CountryRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const ListCardTab(),
+        child: const CountryTab(),
         transitionsBuilder: TransitionsBuilders.noTransition,
         opaque: true,
         barrierDismissible: false,
       );
     },
-    CategoryCardRoute.name: (routeData) {
+    CityRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const CategoryCardTab(),
-        transitionsBuilder: TransitionsBuilders.noTransition,
-        opaque: true,
-        barrierDismissible: false,
-      );
-    },
-    TypeCardRoute.name: (routeData) {
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: const TypeCardTab(),
+        child: const CityTab(),
         transitionsBuilder: TransitionsBuilders.noTransition,
         opaque: true,
         barrierDismissible: false,
@@ -163,31 +154,26 @@ class _$AppRouter extends RootStackRouter {
           guards: [authGuard],
           children: [
             RouteConfig(
-              CardRoute.name,
-              path: 'card',
+              WorldRoute.name,
+              path: 'world',
               parent: MainRoute.name,
               children: [
                 RouteConfig(
                   '#redirect',
                   path: '',
-                  parent: CardRoute.name,
-                  redirectTo: 'list_card',
+                  parent: WorldRoute.name,
+                  redirectTo: 'country',
                   fullMatch: true,
                 ),
                 RouteConfig(
-                  ListCardRoute.name,
-                  path: 'list_card',
-                  parent: CardRoute.name,
+                  CountryRoute.name,
+                  path: 'country',
+                  parent: WorldRoute.name,
                 ),
                 RouteConfig(
-                  CategoryCardRoute.name,
-                  path: 'category_card',
-                  parent: CardRoute.name,
-                ),
-                RouteConfig(
-                  TypeCardRoute.name,
-                  path: 'type_card',
-                  parent: CardRoute.name,
+                  CityRoute.name,
+                  path: 'city',
+                  parent: WorldRoute.name,
                 ),
               ],
             ),
@@ -241,6 +227,12 @@ class _$AppRouter extends RootStackRouter {
           LoginRoute.name,
           path: '/login',
         ),
+        RouteConfig(
+          '*#redirect',
+          path: '*',
+          redirectTo: '/',
+          fullMatch: true,
+        ),
       ];
 }
 
@@ -292,16 +284,16 @@ class LoginRouteArgs {
 }
 
 /// generated route for
-/// [CardPage]
-class CardRoute extends PageRouteInfo<void> {
-  const CardRoute({List<PageRouteInfo>? children})
+/// [WorldPage]
+class WorldRoute extends PageRouteInfo<void> {
+  const WorldRoute({List<PageRouteInfo>? children})
       : super(
-          CardRoute.name,
-          path: 'card',
+          WorldRoute.name,
+          path: 'world',
           initialChildren: children,
         );
 
-  static const String name = 'CardRoute';
+  static const String name = 'WorldRoute';
 }
 
 /// generated route for
@@ -331,39 +323,27 @@ class PaymentRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ListCardTab]
-class ListCardRoute extends PageRouteInfo<void> {
-  const ListCardRoute()
+/// [CountryTab]
+class CountryRoute extends PageRouteInfo<void> {
+  const CountryRoute()
       : super(
-          ListCardRoute.name,
-          path: 'list_card',
+          CountryRoute.name,
+          path: 'country',
         );
 
-  static const String name = 'ListCardRoute';
+  static const String name = 'CountryRoute';
 }
 
 /// generated route for
-/// [CategoryCardTab]
-class CategoryCardRoute extends PageRouteInfo<void> {
-  const CategoryCardRoute()
+/// [CityTab]
+class CityRoute extends PageRouteInfo<void> {
+  const CityRoute()
       : super(
-          CategoryCardRoute.name,
-          path: 'category_card',
+          CityRoute.name,
+          path: 'city',
         );
 
-  static const String name = 'CategoryCardRoute';
-}
-
-/// generated route for
-/// [TypeCardTab]
-class TypeCardRoute extends PageRouteInfo<void> {
-  const TypeCardRoute()
-      : super(
-          TypeCardRoute.name,
-          path: 'type_card',
-        );
-
-  static const String name = 'TypeCardRoute';
+  static const String name = 'CityRoute';
 }
 
 /// generated route for

@@ -4,8 +4,8 @@ import 'package:menoreh_library/core/_core.dart';
 import 'package:menoreh_library/presentation/_presentation.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
-class CategoryCardAddForm extends StatelessWidget {
-  const CategoryCardAddForm({Key? key}) : super(key: key);
+class CityAddForm extends StatelessWidget {
+  const CityAddForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

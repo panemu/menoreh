@@ -47,22 +47,31 @@ class TextFieldAuth extends StatelessWidget {
           focusNode: focusNode,
           keyboardType: inputType,
           decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.grey.shade100, width: 1.0),
-              borderRadius: BorderRadius.circular(AppDimens.radiusMedium),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.grey.shade300, width: 1),
+                borderRadius: BorderRadius.circular(AppDimens.radiusMedium),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: AppColors.secondary, width: 1.5),
+                borderRadius: BorderRadius.circular(AppDimens.radiusMedium),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: AppColors.red, width: 1.5),
+                borderRadius: BorderRadius.circular(AppDimens.radiusMedium),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: AppColors.red, width: 1.5),
+                borderRadius: BorderRadius.circular(AppDimens.radiusMedium),
+              ),
+              errorStyle: const TextStyle(color: AppColors.red),
+              alignLabelWithHint: true,
+              floatingLabelBehavior: FloatingLabelBehavior.never,
+              floatingLabelStyle: TextStyle(color: AppColors.labelSecondary),
+              hintText: hint,
+              hintStyle: TextStyle(color: AppColors.grey.shade300),
+              contentPadding: const EdgeInsets.all(AppDimens.paddingMedium),
+              suffix: suffix,
             ),
-            focusColor: AppColors.secondary,
-            focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: AppColors.secondary, width: 1.5),
-              borderRadius: BorderRadius.circular(AppDimens.radiusMedium),
-            ),
-            
-            floatingLabelBehavior: FloatingLabelBehavior.never,
-            floatingLabelStyle: TextStyle(color: AppColors.labelSecondary),
-            hintText: hint,
-            contentPadding: const EdgeInsets.all(AppDimens.paddingMedium),
-            suffixIcon: suffix,
-          ),
           enabled: enabled,
           maxLines: multiline ? 4 : 1,
           textInputAction: inputAction,

@@ -3,14 +3,13 @@ const String mainPath = '/';
 const String loginPath = '/login';
 
 // nav menu route
-const String cardPath = 'card';
+const String worldPath = 'world';
 const String usersPath = 'users';
 const String paymentPath = 'payment';
 
-// sub route Card
-const String listCardPath = 'list_card';
-const String categoryCardPath = 'category_card';
-const String typeCardPath = 'type_card';
+// sub route World
+const String countryPath = 'country';
+const String cityPath = 'city';
 
 // sub route Users
 const String listUsersPath = 'list_user';

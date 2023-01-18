@@ -17,25 +17,20 @@ part 'app_router.gr.dart';
       name: 'MainRoute',
       children: [
         AutoRoute(
-          path: cardPath,
-          page: CardPage,
-          name: 'CardRoute',
+          path: worldPath,
+          page: WorldPage,
+          name: 'WorldRoute',
           children: [
             AutoRoute(
-              path: listCardPath,
-              name: 'ListCardRoute',
-              page: ListCardTab,
+              path: countryPath,
+              name: 'CountryRoute',
+              page: CountryTab,
               initial: true,
             ),
             AutoRoute(
-              path: categoryCardPath,
-              name: 'CategoryCardRoute',
-              page: CategoryCardTab,
-            ),
-            AutoRoute(
-              path: typeCardPath,
-              name: 'TypeCardRoute',
-              page: TypeCardTab,
+              path: cityPath,
+              name: 'CityRoute',
+              page: CityTab,
             ),
           ],
         ),
@@ -86,6 +81,7 @@ part 'app_router.gr.dart';
       ],
     ),
     AutoRoute(path: loginPath, name: 'LoginRoute', page: LoginPage),   
+    RedirectRoute(path: '*', redirectTo: '/'),
   ],
 )
 class AppRouter extends _$AppRouter {

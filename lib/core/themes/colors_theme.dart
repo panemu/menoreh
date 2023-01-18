@@ -29,7 +29,7 @@ class AppColors {
   static const Color warning = Color(0xFFFF9F0A);
   static const Color success = Color(0xFF32D74B);
   static const Color white = Color(0xFFFFFFFF);
-  static const Color transparant = Colors.transparent;
+  static const Color transparent = Colors.transparent;
   static const Color splash = Color(0x2AFFF8FF);
   static const Color listMenu = Color(0xFF1F3682);
 

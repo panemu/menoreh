@@ -18,10 +18,10 @@ class AppTextStyle {
         fontWeight: FontWeight.w500,
       );
 
-  /// card title `fsize: 24.0, color: labelPrimary, weight: semi-bold`
+  /// card title `fsize: 20.0, color: labelPrimary, weight: semi-bold`
   static TextStyle get titleDrawer => const TextStyle(
         color: AppColors.white,
-        fontSize: 24.0,
+        fontSize: 20.0,
         fontWeight: FontWeight.w500,
       );
 
@@ -60,6 +60,14 @@ class AppTextStyle {
         color: AppColors.white,
         fontSize: AppDimens.size4L,
         fontWeight: FontWeight.w600,
+        wordSpacing: 0.35,
+      );
+
+  /// for loading title
+  static TextStyle get titleLoading => TextStyle(
+        color: AppColors.grey.shade100,
+        fontSize: AppDimens.size3M,
+        fontWeight: FontWeight.w500,
         wordSpacing: 0.35,
       );
 }

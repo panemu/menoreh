@@ -1,6 +1,9 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:data/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:menoreh_library/core/_core.dart';
+import 'package:menoreh_library/injections.dart';
 import 'package:menoreh_library/presentation/_presentation.dart';
 
 class SidebarDrawer extends StatelessWidget {
@@ -34,7 +37,7 @@ class SidebarDrawer extends StatelessWidget {
                   itemCount: listMenu.length,
                   itemBuilder: (BuildContext context, int index) {
                     return SidebarDrawerItem(
-                      press: () => onChange.call(index),
+                      onPressed: () => onChange.call(index),
                       title: listMenu[index].title,
                       icon: listMenu[index].icon,
                       isActive: indexPage == index,
@@ -101,26 +104,35 @@ class _Company extends StatelessWidget {
           ? const EdgeInsets.symmetric(horizontal: AppDimens.paddingMediumX)
           : const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmallX),
       height: AppDimens.appBarHeight,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SvgPicture.asset(
-            AppImages.logoSvg,
-            width: AppDimens.sizeXL,
-            height: AppDimens.sizeXL,
-          ),
-          Visibility(
-            visible: isExpanded,
-            child: const SizedBox(width: AppDimens.paddingMediumX),
-          ),
-          Visibility(
-            visible: isExpanded,
-            child: Text(
-              'Rekat Web',
-              style: AppTextStyle.titleDrawer,
+      child: InkWell(
+        onTap: () => context.router.pushAndPopUntil(const MainRoute(), predicate: (r) => true),
+        focusColor: AppColors.transparent,
+        hoverColor: AppColors.transparent,
+        splashColor: AppColors.transparent,
+        highlightColor: AppColors.transparent,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SvgPicture.asset(
+              AppImages.logoSvg,
+              width: AppDimens.sizeXL,
+              height: AppDimens.sizeXL,
             ),
-          ),
-        ],
+            Visibility(
+              visible: isExpanded,
+              child: const SizedBox(width: AppDimens.paddingMediumX),
+            ),
+            Visibility(
+              visible: isExpanded,
+              child: Text(
+                sl<FlavorConfig>().values!.appName!,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyle.titleDrawer,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

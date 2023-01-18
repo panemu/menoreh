@@ -12,5 +12,5 @@ export 'text_field_tags.dart';
 export 'text_field_search.dart';
 export 'text_field_switch_button.dart';
 export 'text_field_row.dart';
-export 'text_field_email.dart';
+export 'text_field_username.dart';
 export 'text_field_password.dart';

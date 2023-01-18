@@ -5,13 +5,19 @@ import 'package:menoreh_library/core/_core.dart';
 import 'package:menoreh_library/presentation/_presentation.dart';
 
 class SidebarBodyProfile extends StatelessWidget {
-  final VoidCallback onTap;
-  final UserProfileModel user;
+  final String imageUrl;
+  final String name;
+  final String role;
+  final List<ProfileTile> listContents;
+  final void Function() onLogout;
 
   const SidebarBodyProfile({
     super.key,
-    required this.onTap,
-    required this.user,
+    required this.imageUrl,
+    required this.name,
+    required this.listContents,
+    required this.role,
+    required this.onLogout,
   });
 
   @override
@@ -26,24 +32,29 @@ class SidebarBodyProfile extends StatelessWidget {
         useAnimation: false,
         debounce: true,
         targetBuilder: (targetOffset, targetSize) => Offset(targetOffset.dx - 144, targetOffset.dy - 10),
-        builder: (_) => _PopDetailProfile(user: user),
+        builder: (_) => _PopDetailProfile(
+          imageUrl: imageUrl,
+          name: name,
+          listContents: listContents,
+          role: role,
+          onLogout: onLogout,
+        ),
       ),
-      focusColor: AppColors.transparant,
-      hoverColor: AppColors.transparant,
-      splashColor: AppColors.transparant,
-      highlightColor: AppColors.transparant,
+      focusColor: AppColors.transparent,
+      hoverColor: AppColors.transparent,
+      splashColor: AppColors.transparent,
+      highlightColor: AppColors.transparent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           CacheImageWidget(
-            imageUrl: user.image,
+            imageUrl: imageUrl,
             size: Size(AppDimens.sizeXL, AppDimens.sizeXL),
             defaultImage: AppImages.emptyAvatar,
-            disbleTap: true,
           ),
-          context.responsiveValue(
-            desktop: SizedBox(width: AppDimens.size3S),
-            mobile: const SizedBox(),
+          Visibility(
+            visible: context.responsiveValue<bool>(mobile: false, desktop: true),
+            child: SizedBox(width: AppDimens.size3S),
           ),
           Visibility(
             visible: context.responsiveValue<bool>(mobile: false, desktop: true),
@@ -54,17 +65,20 @@ class SidebarBodyProfile extends StatelessWidget {
                 SizedBox(
                   width: AppDimens.widthAppProfile,
                   child: Text(
-                    user.name,
+                    name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyle.titleAppProfile,
                   ),
                 ),
                 SizedBox(height: AppDimens.size2S),
-                ChipWidget(
-                  color: AppColors.purple,
-                  value: user.role,
-                  fontSize: 9.0,
+                Offstage(
+                  offstage: role.isEmpty,
+                  child: ChipWidget(
+                    color: AppColors.purple,
+                    value: role,
+                    fontSize: 9.0,
+                  ),
                 ),
               ],
             ),
@@ -75,10 +89,86 @@ class SidebarBodyProfile extends StatelessWidget {
   }
 }
 
-class _PopDetailProfile extends StatelessWidget {
-  final UserProfileModel user;
+class ProfileTile extends StatelessWidget {
+  final String label;
+  final String value;
 
-  const _PopDetailProfile({required this.user});
+  const ProfileTile({Key? key, required this.label, required this.value}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: TextStyle(color: AppColors.labelSecondary, fontSize: 13),
+          ),
+          SizedBox(width: AppDimens.size4S),
+          SelectableText(
+            value,
+            maxLines: 1,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              color: AppColors.labelPrimary,
+              fontSize: AppDimens.size2M,
+              fontWeight: FontWeight.w500,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SideBodyProfileLoading extends StatelessWidget {
+  const SideBodyProfileLoading({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        ShimmerCustom(size: Size(AppDimens.sizeXL, AppDimens.sizeXL)),
+        Visibility(
+          visible: context.responsiveValue<bool>(mobile: false, desktop: true),
+          child: SizedBox(width: AppDimens.size3S),
+        ),
+        Visibility(
+          visible: context.responsiveValue<bool>(mobile: false, desktop: true),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ShimmerCustom(size: Size(AppDimens.size8X, AppDimens.size3M)),
+              SizedBox(height: AppDimens.size2S),
+              ShimmerCustom(size: Size(AppDimens.sizeXL, AppDimens.size2M)),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class _PopDetailProfile extends StatelessWidget {
+  final List<ProfileTile> listContents;
+  final String imageUrl;
+  final String name;
+  final String? role;
+  final void Function() onLogout;
+
+  const _PopDetailProfile({
+    required this.imageUrl,
+    required this.name,
+    required this.listContents,
+    required this.role,
+    required this.onLogout,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -113,35 +203,33 @@ class _PopDetailProfile extends StatelessWidget {
                   imageUrl: AppImages.avatarUrl,
                   size: Size(AppDimens.size2X, AppDimens.size2X),
                   defaultImage: AppImages.emptyAvatar,
-                  disbleTap: true,
                 ),
                 SizedBox(height: AppDimens.size3S),
                 Text(
-                  user.name,
+                  name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyle.titleAppProfile.copyWith(fontSize: AppDimens.size4M),
                 ),
                 SizedBox(height: AppDimens.size2S),
-                ChipWidget(
-                  color: AppColors.purple,
-                  value: user.role,
-                  fontSize: AppDimens.sizeM,
+                Offstage(
+                  offstage: role == null,
+                  child: ChipWidget(
+                    color: AppColors.purple,
+                    value: role ?? '',
+                    fontSize: AppDimens.sizeM,
+                  ),
                 ),
                 Divider(height: AppDimens.size3L),
-                _ListColumn(
-                  label: 'Email',
-                  value: user.email,
-                ),
-                SizedBox(height: AppDimens.sizeM),
-                _ListColumn(
-                  label: 'UUID',
-                  value: user.uuid,
-                ),
-                SizedBox(height: AppDimens.sizeM),
-                _ListColumn(
-                  label: 'Paket',
-                  value: user.package,
+                ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: listContents.length,
+                  itemBuilder: (_, index) => ProfileTile(
+                    label: listContents[index].label,
+                    value: listContents[index].value,
+                  ),
+                  separatorBuilder: (_, __) => SizedBox(height: AppDimens.sizeM),
                 ),
                 SizedBox(height: AppDimens.sizeL),
                 SizedBox(
@@ -149,6 +237,7 @@ class _PopDetailProfile extends StatelessWidget {
                   child: ElevatedButton.icon(
                     onPressed: () {
                       SmartDialog.dismiss();
+                      onLogout.call();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.lightRed,
@@ -165,59 +254,4 @@ class _PopDetailProfile extends StatelessWidget {
       ),
     );
   }
-}
-
-class _ListColumn extends StatelessWidget {
-  final String label;
-  final String value;
-
-  const _ListColumn({Key? key, required this.label, required this.value}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: TextStyle(color: AppColors.labelSecondary, fontSize: 13),
-          ),
-          SizedBox(width: AppDimens.size4S),
-          SelectableText(
-            value,
-            maxLines: 1,
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              color: AppColors.labelPrimary,
-              fontSize: AppDimens.size2M,
-              fontWeight: FontWeight.w500,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-///TODO please set to repository entity
-class UserProfileModel {
-  final String image;
-  final String name;
-  final String uuid;
-  final String role;
-  final String email;
-  final String package;
-
-  UserProfileModel({
-    required this.image,
-    required this.name,
-    required this.uuid,
-    required this.role,
-    required this.email,
-    required this.package,
-  });
 }

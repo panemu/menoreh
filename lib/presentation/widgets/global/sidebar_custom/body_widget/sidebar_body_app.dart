@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:menoreh_library/core/_core.dart';
-import 'package:menoreh_library/presentation/_presentation.dart';
 
 class SidebarBodyApp extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
   /// if you use tabBar please wrap [SidaberBodyApp] with [DefaultTabController] on top widget
   final Widget? tabBar;
-  final SidebarBodyProfile? profile;
+  final Widget? profile;
   final List<Widget>? action;
   final double? height;
 

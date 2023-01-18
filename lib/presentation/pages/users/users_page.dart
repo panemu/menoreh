@@ -33,17 +33,7 @@ class UsersPage extends StatelessWidget {
                   Tab(text: 'Role User'),
                 ],
               ),
-              profile: SidebarBodyProfile(
-                onTap: () {},
-                user: UserProfileModel(
-                  name: 'Nanang Prasetya Bekti',
-                  image: AppImages.avatarUrl,
-                  role: 'Admin',
-                  email: 'nanang@mail.com',
-                  package: 'FREE',
-                  uuid: 'vpUi37K2f7',
-                ),
-              ),
+              profile: const ProfilePage(),
               action: [
                 ElevatedButtonIcon(
                   onPressed: () {},

@@ -65,11 +65,14 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, bool>> logout() async {
     try {
-      bool status = await localDatasource.logout();
+      await remoteDatasource.logout();
+      final data = await localDatasource.logout();
 
-      return Right(status);
+      return Right(data);
     } catch (e) {
-      if (e is CacheException) {
+      if (e is ServerException) {
+        return Left(ServerFailure(message: e.message));
+      } else if (e is CacheException) {
         return Left(CacheFailure(message: e.message));
       } else {
         return Left(UnknownFailure(message: FAILURE_UNKNOWN));

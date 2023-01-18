@@ -8,7 +8,6 @@ class CacheImageWidget extends StatelessWidget {
   final Size size;
   final double? radius;
   final String? defaultImage;
-  final bool? disbleTap;
 
   const CacheImageWidget({
     super.key,
@@ -16,42 +15,32 @@ class CacheImageWidget extends StatelessWidget {
     required this.size,
     this.radius,
     this.defaultImage,
-    this.disbleTap = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(radius ?? AppDimens.radiusLargeX),
-      onTap: disbleTap!
-          ? null
-          : () => showDialog(
-                context: context,
-                builder: (context) => ImageViewWidget(imageUrl: imageUrl, size: size),
-              ),
-      child: CachedNetworkImage(
-        imageUrl: imageUrl,
-        imageBuilder: (context, imageProvider) => Container(
-          width: size.width,
-          height: size.height,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(radius ?? AppDimens.radiusLargeX),
-            border: Border.all(color: AppColors.white, width: 2.0),
-            image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-          ),
+    return CachedNetworkImage(
+      imageUrl: imageUrl,
+      imageBuilder: (context, imageProvider) => Container(
+        width: size.width,
+        height: size.height,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(radius ?? AppDimens.radiusLarge),
+          border: Border.all(color: AppColors.white, width: 2.0),
+          image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
         ),
-        fit: BoxFit.cover,
-        placeholder: (_, url) => ShimmerCustom(size: size, radius: radius),
-        errorWidget: (_, url, error) => Container(
-          width: size.width,
-          height: size.height,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(radius ?? AppDimens.radiusLargeX),
-            border: Border.all(color: AppColors.white, width: 2.0),
-            image: DecorationImage(
-              image: AssetImage(defaultImage ?? AppImages.emptyAvatar),
-              fit: BoxFit.cover,
-            ),
+      ),
+      fit: BoxFit.cover,
+      placeholder: (_, url) => ShimmerCustom(size: size, radius: radius),
+      errorWidget: (_, url, error) => Container(
+        width: size.width,
+        height: size.height,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(radius ?? AppDimens.radiusLarge),
+          border: Border.all(color: AppColors.white, width: 2.0),
+          image: DecorationImage(
+            image: AssetImage(defaultImage ?? AppImages.emptyAvatar),
+            fit: BoxFit.cover,
           ),
         ),
       ),

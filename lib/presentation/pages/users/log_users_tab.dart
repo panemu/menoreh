@@ -37,8 +37,8 @@ class _LogUsersTabState extends State<LogUsersTab> {
             context: context,
             title: 'Export log user',
             description: 'Unduh atau export ke file dokumen excel.',
-            submitted: 'Export',
-            onSubmitted: () {},
+            // submitted: 'Export',
+            // onSubmitted: () {},
           ),
         ),
         Expanded(

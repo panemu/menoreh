@@ -128,3 +128,9 @@ extension TypeStateEnum on TypeState {
   bool get isLoaded => this == TypeState.loaded;
   bool get isNotLoaded => this == TypeState.notLoaded;
 }
+
+extension AuthStateEnum on AuthState {
+  bool get isLoading => this == AuthState.loading;
+  bool get isLoggedIn => this == AuthState.loggedIn;
+  bool get isNotLoggedIn => this == AuthState.notLoggedIn;
+}

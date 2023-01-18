@@ -63,8 +63,8 @@ class _HistoryPaymentTabState extends State<HistoryPaymentTab> {
             context: context,
             title: 'Export daftar pembayaran',
             description: 'Unduh atau export ke file dokumen excel.',
-            submitted: 'Export',
-            onSubmitted: () {},
+            // submitted: 'Export',
+            // onSubmitted: () {},
           ),
         ),
         Expanded(

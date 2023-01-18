@@ -4,7 +4,7 @@ import 'package:menoreh_library/core/_core.dart';
 class SidebarDrawerItem extends StatelessWidget {
   final String title;
   final Widget icon;
-  final VoidCallback press;
+  final VoidCallback? onPressed;
   final bool? isActive;
   final bool? isExpanded;
 
@@ -12,7 +12,7 @@ class SidebarDrawerItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.icon,
-    required this.press,
+    this.onPressed,
     this.isActive,
     this.isExpanded,
   });
@@ -28,13 +28,13 @@ class SidebarDrawerItem extends StatelessWidget {
         contentPadding: isExpanded!
             ? const EdgeInsets.symmetric(horizontal: AppDimens.paddingMediumX)
             : EdgeInsets.symmetric(horizontal: AppDimens.paddingSmallX, vertical: AppDimens.sizeZero),
-        onTap: press,
+        onTap: onPressed,
         horizontalTitleGap: 0.0,
         selected: isActive!,
         iconColor: AppColors.bgSecondary,
         textColor: AppColors.bgSecondary,
         selectedTileColor: AppColors.listMenu,
-        focusColor: AppColors.transparant,
+        focusColor: AppColors.transparent,
         selectedColor: AppColors.white,
         dense: !isExpanded!,
         title: Row(

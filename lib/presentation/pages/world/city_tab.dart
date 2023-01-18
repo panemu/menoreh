@@ -4,14 +4,14 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:menoreh_library/core/_core.dart';
 import 'package:menoreh_library/presentation/_presentation.dart';
 
-class CategoryCardTab extends StatefulWidget {
-  const CategoryCardTab({Key? key}) : super(key: key);
+class CityTab extends StatefulWidget {
+  const CityTab({Key? key}) : super(key: key);
 
   @override
-  State<CategoryCardTab> createState() => _CategoryCardTabState();
+  State<CityTab> createState() => _CategoryCardTabState();
 }
 
-class _CategoryCardTabState extends State<CategoryCardTab> {
+class _CategoryCardTabState extends State<CityTab> {
   final int _rowsPerPage = 15;
   late CategoryDataGridSource categoryDataSource;
 
@@ -55,13 +55,13 @@ class _CategoryCardTabState extends State<CategoryCardTab> {
           onAdd: () => AppDialog.form(
             context: context,
             title: 'Tambah Kategori',
-            content: const CategoryCardAddForm(),
+            content: const CityAddForm(),
             onSubmitted: () {},
           ),
           onFilter: () => AppDialog.filter<bool>(
             context: context,
             title: 'Filter Kategori',
-            content: const CategoryCardFilterForm(),
+            content: const CityFilterForm(),
             onSubmitted: () {},
             onReset: () {},
           ),
@@ -80,8 +80,8 @@ class _CategoryCardTabState extends State<CategoryCardTab> {
             context: context,
             title: 'Export daftar kategori',
             description: 'Unduh atau export ke file dokumen excel.',
-            submitted: 'Export',
-            onSubmitted: () {},
+            // submitted: 'Export',
+            // onSubmitted: () {},
           ),
         ),
         Expanded(
@@ -117,9 +117,9 @@ class _CategoryCardTabState extends State<CategoryCardTab> {
                     context: context,
                     title: 'Hapus kategori',
                     description: 'Apakah anda yakin ingin menghapus kategori ini?',
-                    submittedColor: AppColors.red,
-                    submitted: 'Hapus',
-                    onSubmitted: () {},
+                    // submittedColor: AppColors.red,
+                    // submitted: 'Hapus',
+                    // onSubmitted: () {},
                   ),
                   onEdit: () {},
                 );

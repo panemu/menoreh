@@ -25,7 +25,7 @@ class AppTheme {
           indicatorColor: AppColors.secondary,
         ),
         overlayColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-          return AppColors.transparant;
+          return AppColors.transparent;
         }),
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -68,7 +68,7 @@ class AppTheme {
           foregroundColor: AppColors.white,
           backgroundColor: AppColors.primary,
           minimumSize: Size(AppDimens.size8X, AppDimens.size3XL),
-          shadowColor: AppColors.transparant,
+          shadowColor: AppColors.transparent,
           elevation: 0,
         ),
       ),
@@ -79,7 +79,7 @@ class AppTheme {
           shape: const StadiumBorder(),
           padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingLarge),
           minimumSize: Size(AppDimens.size8X, AppDimens.size3XL),
-          shadowColor: AppColors.transparant,
+          shadowColor: AppColors.transparent,
           elevation: 0,
         ),
       ),

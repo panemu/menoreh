@@ -1,4 +1,4 @@
-export 'title_login.dart';
+export 'top_login.dart';
 export 'divider_login.dart';
 export 'bg_left_login.dart';
 export 'bg_right_login.dart';

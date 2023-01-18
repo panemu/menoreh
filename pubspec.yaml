@@ -26,8 +26,6 @@ dependencies:
     sdk: flutter
   
   # packages local
-  form_inputs:
-    path: packages/form_inputs/
   domain:
     path: packages/domain/
   data:
@@ -50,6 +48,7 @@ dependencies:
   textfield_tags: ^2.0.2
   photo_view: ^0.14.0
   get: ^4.6.5
+  responsive_framework: ^0.2.0
   # state management
   flutter_bloc: ^8.1.1
   bloc: ^8.1.0
@@ -74,12 +73,11 @@ dependencies:
   fl_chart: ^0.55.2
   # package versioning
   package_info_plus: ^3.0.2
-  # form validation
-  formz: ^0.4.1
   # equality comparisons
   equatable: ^2.0.5
   # flavor environment
   flutter_flavorizr: ^2.1.5
+  # local storage
   hive_flutter: ^1.1.0
 
 dev_dependencies:

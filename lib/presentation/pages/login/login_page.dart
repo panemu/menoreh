@@ -1,5 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:formz/formz.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:menoreh_library/core/_core.dart';
 import 'package:menoreh_library/injections.dart';
@@ -16,11 +17,18 @@ class LoginPage extends StatelessWidget {
       create: (context) => sl<LoginCubit>(),
       child: BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
-          if (state.status == FormzStatus.submissionSuccess) {
-            onLoginResult!(true);
-          } 
-          if(state.status == FormzStatus.submissionFailure){
-            AppDialog.confirm(context: context, title: "Error", description: state.errorMessage);
+          if (state.status.isLoading) {
+            SmartDialog.showLoading();
+          } else if (state.status.isLoggedIn) {
+            SmartDialog.dismiss();
+            if (onLoginResult != null) {
+              onLoginResult!(true);
+            } else {
+              context.router.pushAndPopUntil(const MainRoute(), predicate: (r) => true);
+            }
+          } else if (state.status.isNotLoggedIn) {
+            SmartDialog.dismiss();
+            AppDialog.handleError(context, state.errorMessage!);
           }
         },
         child: Scaffold(
@@ -50,7 +58,7 @@ class _ContentBuilder extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: context.responsiveValue(
-            desktop: context.width / 3,
+            desktop: context.width / 3.2,
             tablet: context.width / 5,
             mobile: AppDimens.sizeXL,
           ),
@@ -58,8 +66,9 @@ class _ContentBuilder extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
-            TitleLogin(),
+            TopLogin(),
             LoginCredentials(),
+            VersioningLogin(),
             // SizedBox(height: AppDimens.size2M),
             // const DividerLogin(),
             // SizedBox(height: AppDimens.size2M),
@@ -68,7 +77,6 @@ class _ContentBuilder extends StatelessWidget {
             // const LoginGoogle(),
             // SizedBox(height: AppDimens.sizeM),
             // const LoginApple(),
-            // const VersioningLogin(),
           ],
         ),
       ),

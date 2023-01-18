@@ -9,7 +9,7 @@ class BaseApi {
 
   BaseApi(this.env) {
     FlavorConfig? env = FlavorConfig.instance;
-    log("FlavorConfig info => ${env.env}");
+    log("FlavorConfig info => ${env.env},[${env.values!.baseApi}] ");
   }
 
   static PrettyDioLogger logger = PrettyDioLogger(
@@ -27,7 +27,7 @@ class BaseApi {
     sendTimeout: FlavorConfig.instance.values!.delay,
     headers: {
       'content-Type': 'application/json',
-      'authorization': FlavorConfig.instance.values!.authToken,
+      // 'authorization': FlavorConfig.instance.values!.authToken,
     },
   );
 

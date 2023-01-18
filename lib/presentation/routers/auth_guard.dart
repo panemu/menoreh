@@ -1,27 +1,30 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:data/data.dart';
+import 'package:domain/domain.dart';
 import 'package:menoreh_library/presentation/_presentation.dart';
 
 class AuthGuard extends AutoRouteGuard {
-  final bool status;
+  final AuthCheck authChack;
 
-  AuthGuard(this.status);
+  AuthGuard(this.authChack);
 
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
-    if (!status) {
-      router.pushAndPopUntil(
+    final data = await authChack.call(NoParams());
+
+    data.fold(
+      (failure) => router.pushAndPopUntil(
         LoginRoute(
           onLoginResult: (value) {
-            if(value ?? false) {
+            if (value ?? false) {
               resolver.next();
               router.removeLast();
             }
           },
         ),
         predicate: (r) => true,
-      );
-    } else {
-      resolver.next(true);
-    }
+      ),
+      (value) => resolver.next(true),
+    );
   }
 }
