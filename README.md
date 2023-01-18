@@ -1,16 +1,35 @@
-# menoreh_library
+# Getting Started
 
-A new Flutter project.
+Menoreh library is an open source developed by Panemu Solusi Industri.
 
-## Getting Started
+## Installation
 
-This project is a starting point for a Flutter application.
+For help getting started with Flutter, view our online [documentation](https://flutter.io/).
 
-A few resources to get you started if this is your first Flutter project:
+* Flutter version : `3.0.5`
+* Dart version : `2.17.6`
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**Step 1:**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Clone or download this repo by using the code below:
+
+```bash
+git clone https://github.com/panemu/menoreh/.git
+```
+
+**Step 2:**
+
+Go to project root and execute the following command in console to get the required dependencies:
+
+```bash
+flutter pub get
+```
+
+**Step 3:**
+
+Run the Flavor:
+
+```bash
+flutter run --flavor development --target main_development.dart
+flutter run --flavor production --target main_production.dart
+```

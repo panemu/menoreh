@@ -8,9 +8,7 @@ class AuthGuard extends AutoRouteGuard {
 
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
-    if (status) {
-      resolver.next(true);
-    } else {
+    if (!status) {
       router.pushAndPopUntil(
         LoginRoute(
           onLoginResult: (value) {
@@ -22,6 +20,8 @@ class AuthGuard extends AutoRouteGuard {
         ),
         predicate: (r) => true,
       );
+    } else {
+      resolver.next(true);
     }
   }
 }

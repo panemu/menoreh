@@ -17,7 +17,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<CheckLoginCubit>(
-          create: (_) => sl<CheckLoginCubit>(),
+          create: (_) => sl<CheckLoginCubit>()..checkLogin(),
         ),
       ],
       child: BlocBuilder<CheckLoginCubit, CheckLoginState>(
@@ -29,8 +29,9 @@ class App extends StatelessWidget {
             themeMode: ThemeMode.system,
             theme: AppTheme.light(),
             builder: FlutterSmartDialog.init(),
-            routerDelegate: appRouter.delegate(initialRoutes: [LoginRoute()]),
+            routerDelegate: appRouter.delegate(),
             routeInformationParser: appRouter.defaultRouteParser(),
+            routeInformationProvider: appRouter.routeInfoProvider(),
             localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
@@ -39,6 +40,7 @@ class App extends StatelessWidget {
             ],
             supportedLocales: const [Locale('id'), Locale('en')],
             locale: const Locale('id'),
+            
           );
         },
       ),
