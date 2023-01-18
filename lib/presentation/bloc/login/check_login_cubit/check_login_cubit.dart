@@ -12,12 +12,12 @@ class CheckLoginCubit extends Cubit<CheckLoginState> {
   CheckLoginCubit(this._authCheck) : super(const CheckLoginState());
 
   Future<void> checkLogin() async {
-    emit(state.copyWith(status: TypeState.loading));
+    emit(state.copyWith(status: TypeState.loading, value: false));
 
     final data = await _authCheck.call(NoParams());
 
     data.fold(
-      (failure) => emit(state.copyWith(status: TypeState.notLoaded, value: true, message: failure.message)),
+      (failure) => emit(state.copyWith(status: TypeState.notLoaded, value: false, message: failure.message)),
       (value) => emit(state.copyWith(status: TypeState.loaded, value: value)),
     );
   }

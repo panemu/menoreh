@@ -13,7 +13,12 @@
 part of 'app_router.dart';
 
 class _$AppRouter extends RootStackRouter {
-  _$AppRouter([GlobalKey<NavigatorState>? navigatorKey]) : super(navigatorKey);
+  _$AppRouter({
+    GlobalKey<NavigatorState>? navigatorKey,
+    required this.authGuard,
+  }) : super(navigatorKey);
+
+  final AuthGuard authGuard;
 
   @override
   final Map<String, PageFactory> pagesMap = {
@@ -155,6 +160,7 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(
           MainRoute.name,
           path: '/',
+          guards: [authGuard],
           children: [
             RouteConfig(
               CardRoute.name,
@@ -256,7 +262,7 @@ class MainRoute extends PageRouteInfo<void> {
 class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
   LoginRoute({
     Key? key,
-    dynamic Function(bool)? onLoginResult,
+    dynamic Function(bool?)? onLoginResult,
   }) : super(
           LoginRoute.name,
           path: '/login',
@@ -277,7 +283,7 @@ class LoginRouteArgs {
 
   final Key? key;
 
-  final dynamic Function(bool)? onLoginResult;
+  final dynamic Function(bool?)? onLoginResult;
 
   @override
   String toString() {

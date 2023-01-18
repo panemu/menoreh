@@ -13,7 +13,7 @@ part 'app_router.gr.dart';
     AutoRoute(
       path: mainPath,
       page: MainPage,
-      // guards: [AuthGuard],
+      guards: [AuthGuard],
       name: 'MainRoute',
       children: [
         AutoRoute(
@@ -89,7 +89,7 @@ part 'app_router.gr.dart';
   ],
 )
 class AppRouter extends _$AppRouter {
-  // final AuthGuard auth;
+  final AuthGuard auth;
 
-  // AppRouter({required this.auth}) : super(authGuard: auth);
+  AppRouter({required this.auth}) : super(authGuard: auth);
 }

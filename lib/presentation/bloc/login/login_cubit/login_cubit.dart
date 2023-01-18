@@ -29,11 +29,10 @@ class LoginCubit extends Cubit<LoginState> {
     ));
   }
 
-  Future<void> logInWithCredentials() async {
-    if (!state.status.isValidated) return;
+  Future<void> logInWithCredentials(AuthParamsEntity params) async {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
 
-    final data = await postLogin.call(AuthParamsEntity(email: state.email.value, password: state.password.value));
+    final data = await postLogin.call(params);
 
     data.fold(
       (failure) => emit(

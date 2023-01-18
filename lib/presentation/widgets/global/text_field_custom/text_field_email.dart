@@ -55,7 +55,7 @@ class TextFieldEmail extends StatelessWidget {
             controller: controller,
             focusNode: focusNode,
             initialValue: initialValue,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.name,
             style: TextStyle(color: AppColors.grey.shade300),
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(

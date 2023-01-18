@@ -47,8 +47,8 @@ class AuthRepositoryImpl extends AuthRepository {
 
       return Right(user);
     } catch (e) {
-      if (e is ServerException) {
-        return Left(ServerFailure(message: e.message));
+      if (e is AuthException) {
+        return Left(AuthFailure(message: e.message));
       } else if (e is CacheException) {
         return Left(CacheFailure(message: e.message));
       } else {

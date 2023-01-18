@@ -8,24 +8,20 @@ part 'auth_user_model.g.dart';
 @HiveType(typeId: HiveTypes.authUserModel, adapterName: HiveAdapters.authUserModel)
 class AuthUserModel extends AuthUserEntity {
   @HiveField(0)
-  final String authToken;
-  @HiveField(1)
   final int id;
-  @HiveField(2)
+  @HiveField(1)
   final String role;
-  @HiveField(3)
+  @HiveField(2)
   final String username;
-  @HiveField(4)
+  @HiveField(3)
   final List<String> permissions;
 
   const AuthUserModel({
-    required this.authToken,
     required this.id,
     required this.role,
     required this.username,
     required this.permissions,
   }) : super(
-          authToken: authToken,
           id: id,
           role: role,
           username: username,
@@ -35,7 +31,6 @@ class AuthUserModel extends AuthUserEntity {
   @override
   List<Object> get props {
     return [
-      authToken,
       id,
       role,
       username,
@@ -43,16 +38,12 @@ class AuthUserModel extends AuthUserEntity {
     ];
   }
 
-  factory AuthUserModel.fromJson(String source) =>
-      AuthUserModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  factory AuthUserModel.fromMap(Map<String, dynamic> map) {
+  factory AuthUserModel.toJson(Map<String, dynamic> json) {
     return AuthUserModel(
-      authToken: map['authToken'] as String,
-      id: map['id'] as int,
-      role: map['role'] as String,
-      username: map['username'] as String,
-      permissions: List<String>.from((map['permissions'] as List<String>)),
+      id: json['id'] as int,
+      role: json['role'] as String,
+      username: json['username'] as String,
+      permissions: (json['permissions'] as List).map((e) => e.toString()).toList(),
     );
   }
 }

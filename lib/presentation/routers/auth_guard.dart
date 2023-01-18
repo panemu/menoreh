@@ -14,8 +14,10 @@ class AuthGuard extends AutoRouteGuard {
       router.pushAndPopUntil(
         LoginRoute(
           onLoginResult: (value) {
-            resolver.next();
-            router.removeLast();
+            if(value ?? false) {
+              resolver.next();
+              router.removeLast();
+            }
           },
         ),
         predicate: (r) => true,

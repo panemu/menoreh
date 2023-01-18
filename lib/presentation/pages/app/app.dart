@@ -17,20 +17,19 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<CheckLoginCubit>(
-          create: (_) => sl<CheckLoginCubit>()..checkLogin(),
+          create: (_) => sl<CheckLoginCubit>(),
         ),
       ],
       child: BlocBuilder<CheckLoginCubit, CheckLoginState>(
         builder: (context, state) {
-          final appRouter = AppRouter();
-          // final appRouter = AppRouter(auth: AuthGuard(state.value));
+          final appRouter = AppRouter(auth: AuthGuard(state.value));
 
           return MaterialApp.router(
             title: sl<FlavorConfig>().values!.appName!,
             themeMode: ThemeMode.system,
             theme: AppTheme.light(),
             builder: FlutterSmartDialog.init(),
-            routerDelegate: appRouter.delegate(),
+            routerDelegate: appRouter.delegate(initialRoutes: [LoginRoute()]),
             routeInformationParser: appRouter.defaultRouteParser(),
             localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,

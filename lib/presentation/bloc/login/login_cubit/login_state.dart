@@ -6,7 +6,12 @@ class LoginState extends Equatable {
     this.password = const Password.pure(),
     this.status = FormzStatus.pure,
     this.errorMessage = '',
-    this.userEntity,
+    this.userEntity = const AuthUserEntity(
+      id: 0,
+      role: '',
+      username: '',
+      permissions: <String>[],
+    ),
   });
 
   final Email email;

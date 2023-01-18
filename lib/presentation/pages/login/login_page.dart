@@ -7,7 +7,7 @@ import 'package:menoreh_library/presentation/_presentation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatelessWidget {
-  final Function(bool value)? onLoginResult;
+  final Function(bool? value)? onLoginResult;
   const LoginPage({Key? key, this.onLoginResult}) : super(key: key);
 
   @override
@@ -18,6 +18,9 @@ class LoginPage extends StatelessWidget {
         listener: (context, state) {
           if (state.status == FormzStatus.submissionSuccess) {
             onLoginResult!(true);
+          } 
+          if(state.status == FormzStatus.submissionFailure){
+            AppDialog.confirm(context: context, title: "Error", description: state.errorMessage);
           }
         },
         child: Scaffold(

@@ -12,24 +12,26 @@ class BaseApi {
     log("FlavorConfig info => ${env.env}");
   }
 
+  static PrettyDioLogger logger = PrettyDioLogger(
+    responseBody: true,
+    request: false,
+    requestBody: false,
+    responseHeader: false,
+    compact: false,
+  );
+
   static BaseOptions options = BaseOptions(
     baseUrl: FlavorConfig.instance.values!.baseApi!,
     receiveTimeout: FlavorConfig.instance.values!.delay,
     connectTimeout: FlavorConfig.instance.values!.delay,
     sendTimeout: FlavorConfig.instance.values!.delay,
-    headers: {'authorization': FlavorConfig.instance.values!.authToken},
+    headers: {
+      'content-Type': 'application/json',
+      'authorization': FlavorConfig.instance.values!.authToken,
+    },
   );
 
-  final Dio _dio = Dio(BaseApi.options)
-    ..interceptors.add(
-      PrettyDioLogger(
-        responseBody: false,
-        request: false,
-        requestBody: false,
-        responseHeader: false,
-        compact: false,
-      ),
-    );
+  final Dio _dio = Dio(BaseApi.options)..interceptors.add(logger);
 
   Future<dynamic> get(
     String uri, {
@@ -144,14 +146,17 @@ class BaseApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final Response response = await Dio(
-        BaseOptions(
-          baseUrl: FlavorConfig.instance.values!.baseApi!,
-          receiveTimeout: FlavorConfig.instance.values!.delay,
-          connectTimeout: FlavorConfig.instance.values!.delay,
-          sendTimeout: FlavorConfig.instance.values!.delay,
-        ),
-      ).post(
+      final opt = BaseOptions(
+        baseUrl: FlavorConfig.instance.values!.baseApi!,
+        receiveTimeout: FlavorConfig.instance.values!.delay,
+        connectTimeout: FlavorConfig.instance.values!.delay,
+        sendTimeout: FlavorConfig.instance.values!.delay,
+        headers: {'content-Type': 'application/json'},
+      );
+
+      final d = Dio(opt)..interceptors.add(logger);
+
+      final Response response = await d.post(
         uri,
         data: data,
         queryParameters: queryParameters,
@@ -161,7 +166,8 @@ class BaseApi {
         onReceiveProgress: onReceiveProgress,
       );
       return response.data;
-    } catch (e) {
+    } catch (e, s) {
+      log(e.toString(), stackTrace: s);
       if (e is DioError) {
         throw AuthException.fromDioError(e);
       } else {
