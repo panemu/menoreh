@@ -62,8 +62,10 @@ class SidebarBodyProfile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: AppDimens.widthAppProfile,
+                Container(
+                  constraints: const BoxConstraints(
+                    maxWidth: AppDimens.widthAppProfile,
+                  ),
                   child: Text(
                     name,
                     maxLines: 1,

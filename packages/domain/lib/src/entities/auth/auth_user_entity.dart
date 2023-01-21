@@ -4,23 +4,16 @@ class AuthUserEntity extends Equatable {
   final int id;
   final String role;
   final String username;
+  final String authToken;
   final List<String> permissions;
 
   const AuthUserEntity({
     required this.id,
     required this.role,
     required this.username,
+    required this.authToken,
     required this.permissions,
   });
-
-  factory AuthUserEntity.empty() {
-    return const AuthUserEntity(
-      id: 0,
-      role: '',
-      username: '',
-      permissions: <String>[],
-    );
-  }
 
   @override
   List<Object> get props {
@@ -28,7 +21,11 @@ class AuthUserEntity extends Equatable {
       id,
       role,
       username,
+      authToken,
       permissions,
     ];
   }
+
+  @override
+  bool get stringify => true;
 }

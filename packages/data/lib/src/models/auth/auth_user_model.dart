@@ -13,17 +13,21 @@ class AuthUserModel extends AuthUserEntity {
   @HiveField(2)
   final String username;
   @HiveField(3)
+  final String authToken;
+  @HiveField(4)
   final List<String> permissions;
 
   const AuthUserModel({
     required this.id,
     required this.role,
     required this.username,
+    required this.authToken,
     required this.permissions,
   }) : super(
           id: id,
           role: role,
           username: username,
+          authToken: authToken,
           permissions: permissions,
         );
 
@@ -33,15 +37,17 @@ class AuthUserModel extends AuthUserEntity {
       id,
       role,
       username,
+      authToken,
       permissions,
     ];
   }
 
-  factory AuthUserModel.toJson(Map<String, dynamic> json) {
+  factory AuthUserModel.formJson(Map<String, dynamic> json) {
     return AuthUserModel(
       id: json['id'] as int,
       role: json['role'] as String,
       username: json['username'] as String,
+      authToken: json['authToken'] as String,
       permissions: (json['permissions'] as List).map((e) => e.toString()).toList(),
     );
   }

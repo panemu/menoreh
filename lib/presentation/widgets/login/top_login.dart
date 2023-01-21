@@ -18,12 +18,19 @@ class TopLogin extends StatelessWidget {
           height: AppDimens.imageAvatar.height,
         ),
         SizedBox(height: AppDimens.size3M),
-        Text('Masuk ke ${sl<FlavorConfig>().values!.appName}', textAlign: TextAlign.center, style: AppTextStyle.titleLoginPage),
+        Text('Masuk ke ${sl<FlavorConfig>().values!.appName}',
+            textAlign: TextAlign.center, style: AppTextStyle.titleLoginPage),
         SizedBox(height: AppDimens.size3S),
-        Text(
-          'Untuk masuk ke ${sl<FlavorConfig>().values!.appName} silahkan isi Email dan Password dibawah ini.',
+        RichText(
           textAlign: TextAlign.center,
-          style: AppTextStyle.dialogDesc.copyWith(color: AppColors.grey.shade300, fontSize: AppDimens.size2M),
+          text: TextSpan(
+            style: AppTextStyle.dialogDesc.copyWith(color: AppColors.grey.shade300, fontSize: AppDimens.size2M),
+            text: 'Untuk masuk ke ${sl<FlavorConfig>().values!.appName} silahkan isi Email dan Password dibawah ini.',
+            children: [
+              const TextSpan(text: '\n*', style: TextStyle(color: AppColors.red)),
+              TextSpan(text: 'username & password: hellocountry', style: TextStyle(color: AppColors.grey.shade100)),
+            ],
+          ),
         ),
         SizedBox(height: AppDimens.size2L),
       ],

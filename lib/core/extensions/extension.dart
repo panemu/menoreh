@@ -32,10 +32,19 @@ extension IntExtension on int {
     final date = DateTime.fromMillisecondsSinceEpoch(this);
     return DateFormat.yMMMd().add_jm().format(date);
   }
+
+  /// currency number to String 
+  /// e,g `20000` convert to `Rp20.000.00`.
+  String get textDigitOnly => (NumberFormat.simpleCurrency(locale: 'id', decimalDigits: 0, name: "Rp").format(this));
+
+  /// converter int number to decimal `000`.
+  /// e,g `20000` convert to `20.000`
+  String get textDecimalDigit => (NumberFormat.decimalPattern('id').format(this));
 }
 
 extension StringExtension on String {
-  /// For [DATA] date formatting and return as [DateTime]
+  /// For [DATA] date formatting and return as [DateTime].
+  /// e.g `2022-10-01` convert to [DateTime] 
   DateTime toDateTime({bool isHours = false}) {
     late DateFormat inputFormat;
     if (isHours) {
@@ -53,11 +62,6 @@ extension StringExtension on String {
 
   /// String to currency number 
   String get numberDigitOnly => replaceAll(",", "");
-}
-
-extension DoubleExtention on double {
-  /// currency number to String
-  String get textDigitOnly => (NumberFormat.simpleCurrency(locale: 'id', decimalDigits: 0, name: "Rp").format(this));
 }
 
 extension SuffixTypeExtension on SuffixType {

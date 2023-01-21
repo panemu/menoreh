@@ -11,6 +11,7 @@ void main() async {
         appName: 'Menoreh Library',
         apiVersion: '1.0.0',
         baseApi: 'https://scs-demo.panemu.com/country/api2/',
+        authToken: 'c7chrcjgjqo69egoulisjhi01m',
         debug: false,
         delay: 0,
         printResponse: false,

@@ -12,26 +12,15 @@ class BaseApi {
     log("FlavorConfig info => ${env.env},[${env.values!.baseApi}] ");
   }
 
-  static PrettyDioLogger logger = PrettyDioLogger(
+  static String AUTHTOKEN = '';
+
+  static PrettyDioLogger _logger = PrettyDioLogger(
     responseBody: true,
     request: false,
     requestBody: false,
     responseHeader: false,
     compact: false,
   );
-
-  static BaseOptions options = BaseOptions(
-    baseUrl: FlavorConfig.instance.values!.baseApi!,
-    receiveTimeout: FlavorConfig.instance.values!.delay,
-    connectTimeout: FlavorConfig.instance.values!.delay,
-    sendTimeout: FlavorConfig.instance.values!.delay,
-    headers: {
-      'content-Type': 'application/json',
-      // 'authorization': FlavorConfig.instance.values!.authToken,
-    },
-  );
-
-  final Dio _dio = Dio(BaseApi.options)..interceptors.add(logger);
 
   Future<dynamic> get(
     String uri, {
@@ -41,6 +30,19 @@ class BaseApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
+      final BaseOptions _options = BaseOptions(
+        baseUrl: FlavorConfig.instance.values!.baseApi!,
+        receiveTimeout: FlavorConfig.instance.values!.delay,
+        connectTimeout: FlavorConfig.instance.values!.delay,
+        sendTimeout: FlavorConfig.instance.values!.delay,
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': AUTHTOKEN,
+        },
+      );
+
+      final Dio _dio = Dio(_options)..interceptors.add(_logger);
+
       final Response response = await _dio.get(
         uri,
         queryParameters: queryParameters,
@@ -67,7 +69,21 @@ class BaseApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
+    print(AUTHTOKEN);
     try {
+      final BaseOptions _options = BaseOptions(
+        baseUrl: FlavorConfig.instance.values!.baseApi!,
+        receiveTimeout: FlavorConfig.instance.values!.delay,
+        connectTimeout: FlavorConfig.instance.values!.delay,
+        sendTimeout: FlavorConfig.instance.values!.delay,
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': AUTHTOKEN,
+        },
+      );
+
+      final Dio _dio = Dio(_options)..interceptors.add(_logger);
+
       final Response response = await _dio.post(
         uri,
         data: data,
@@ -90,6 +106,19 @@ class BaseApi {
   Future<dynamic> delete(String uri,
       {data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken}) async {
     try {
+      final BaseOptions _options = BaseOptions(
+        baseUrl: FlavorConfig.instance.values!.baseApi!,
+        receiveTimeout: FlavorConfig.instance.values!.delay,
+        connectTimeout: FlavorConfig.instance.values!.delay,
+        sendTimeout: FlavorConfig.instance.values!.delay,
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': AUTHTOKEN,
+        },
+      );
+
+      final Dio _dio = Dio(_options)..interceptors.add(_logger);
+
       final Response response = await _dio.delete(
         uri,
         data: data,
@@ -117,6 +146,19 @@ class BaseApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
+      final BaseOptions _options = BaseOptions(
+        baseUrl: FlavorConfig.instance.values!.baseApi!,
+        receiveTimeout: FlavorConfig.instance.values!.delay,
+        connectTimeout: FlavorConfig.instance.values!.delay,
+        sendTimeout: FlavorConfig.instance.values!.delay,
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': AUTHTOKEN,
+        },
+      );
+
+      final Dio _dio = Dio(_options)..interceptors.add(_logger);
+
       final Response response = await _dio.put(
         uri,
         data: data,
@@ -146,17 +188,19 @@ class BaseApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final opt = BaseOptions(
+      BaseOptions _options = BaseOptions(
         baseUrl: FlavorConfig.instance.values!.baseApi!,
         receiveTimeout: FlavorConfig.instance.values!.delay,
         connectTimeout: FlavorConfig.instance.values!.delay,
         sendTimeout: FlavorConfig.instance.values!.delay,
-        headers: {'content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+        },
       );
 
-      final d = Dio(opt)..interceptors.add(logger);
+      final _dio = Dio(_options)..interceptors.add(_logger);
 
-      final Response response = await d.post(
+      final Response response = await _dio.post(
         uri,
         data: data,
         queryParameters: queryParameters,

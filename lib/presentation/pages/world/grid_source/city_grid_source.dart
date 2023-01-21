@@ -168,7 +168,8 @@ class CategoryDataGridSource extends DataGridSource {
 
   /// Get orders collection
   List<CategoryCardModel> getOrders(List<CategoryCardModel> orderData, int count, {String? culture}) {
-    final int startIndex = orderData.isNotEmpty ? orderData.length : 0, endIndex = startIndex + count;
+    final int startIndex = orderData.isNotEmpty ? orderData.length : 0;
+    final int endIndex = startIndex + count;
 
     for (int i = startIndex; i < endIndex; i++) {
       orderData.add(CategoryCardModel(

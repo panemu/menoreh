@@ -4,7 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class AuthLocalDatasource {
   /// chack local auth data
-  Future<bool> checkLogin();
+  Future<AuthUserEntity> checkLogin();
 
   /// save to local auth data
   Future<void> cacheLogin(AuthUserModel data);
@@ -22,11 +22,11 @@ class AuthLocalDatasourceImpl extends AuthLocalDatasource {
   }
 
   @override
-  Future<bool> checkLogin() async {
+  Future<AuthUserEntity> checkLogin() async {
     Box box = await _getBox();
 
     if (box.containsKey(BOX_KEY_LOGIN)) {
-      return true;
+      return box.get(BOX_KEY_LOGIN);
     } else {
       throw CacheException(message: EXCEPTION_LOGIN);
     }

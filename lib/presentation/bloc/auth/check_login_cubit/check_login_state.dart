@@ -2,26 +2,32 @@ part of 'check_login_cubit.dart';
 
 class CheckLoginState extends Equatable {
   final TypeState status;
-  final bool value;
+  final AuthUserEntity userEntity;
   final String? message;
 
   const CheckLoginState({
     this.status = TypeState.initial,
-    this.value = false,
     this.message,
+    this.userEntity = const AuthUserEntity(
+      id: 0,
+      role: '',
+      username: '',
+      authToken: '',
+      permissions: <String>[],
+    ),
   });
 
   @override
-  List<Object?> get props => [status, value, message];
+  List<Object?> get props => [status, userEntity, message];
 
   CheckLoginState copyWith({
     TypeState? status,
-    bool? value,
+    AuthUserEntity? userEntity,
     String? message,
   }) {
     return CheckLoginState(
       status: status ?? this.status,
-      value: value ?? this.value,
+      userEntity: userEntity ?? this.userEntity,
       message: message ?? this.message,
     );
   }

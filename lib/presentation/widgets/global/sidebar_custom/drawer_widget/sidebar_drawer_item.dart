@@ -3,7 +3,7 @@ import 'package:menoreh_library/core/_core.dart';
 
 class SidebarDrawerItem extends StatelessWidget {
   final String title;
-  final Widget icon;
+  final IconData icon;
   final VoidCallback? onPressed;
   final bool? isActive;
   final bool? isExpanded;
@@ -39,7 +39,7 @@ class SidebarDrawerItem extends StatelessWidget {
         dense: !isExpanded!,
         title: Row(
           children: [
-            icon,
+            Icon(icon),
             (isExpanded!) ? const SizedBox(width: AppDimens.radiusLarge) : const SizedBox(),
             (isExpanded!) ? Text(title) : const SizedBox(),
           ],

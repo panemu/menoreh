@@ -15,8 +15,8 @@ class CheckLoginCubit extends Cubit<CheckLoginState> {
     final data = await _authCheck.call(NoParams());
 
     data.fold(
-      (failure) => emit(state.copyWith(status: TypeState.notLoaded, value: false, message: failure.message)),
-      (value) => emit(state.copyWith(status: TypeState.loaded, value: value)),
+      (failure) => emit(state.copyWith(status: TypeState.notLoaded, message: failure.message)),
+      (value) => emit(state.copyWith(status: TypeState.loaded, userEntity: value)),
     );
   }
 }

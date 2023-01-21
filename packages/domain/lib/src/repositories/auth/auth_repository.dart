@@ -4,7 +4,7 @@ import 'package:domain/src/_src.dart';
 
 abstract class AuthRepository {
   /// check local auth
-  Future<Either<Failure, bool>> checkLogin();
+  Future<Either<Failure, AuthUserEntity>> checkLogin();
 
   /// check local auth
   Future<Either<Failure, bool>> logout();

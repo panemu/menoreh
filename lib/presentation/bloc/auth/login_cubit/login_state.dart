@@ -1,6 +1,10 @@
 part of 'login_cubit.dart';
 
 class LoginState extends Equatable {
+  final AuthState status;
+  final String? errorMessage;
+  final AuthUserEntity? userEntity;
+
   const LoginState({
     this.status = AuthState.initial,
     this.errorMessage = '',
@@ -8,13 +12,10 @@ class LoginState extends Equatable {
       id: 0,
       role: '',
       username: '',
+      authToken: '',
       permissions: <String>[],
     ),
   });
-
-  final AuthState status;
-  final String? errorMessage;
-  final AuthUserEntity? userEntity;
 
   @override
   List<Object> get props => [status, errorMessage!, userEntity!];

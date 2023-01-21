@@ -24,7 +24,10 @@ class AuthGuard extends AutoRouteGuard {
         ),
         predicate: (r) => true,
       ),
-      (value) => resolver.next(true),
+      (value) {
+        resolver.next(true);
+        BaseApi.AUTHTOKEN = value.authToken;
+      },
     );
   }
 }

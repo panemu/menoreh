@@ -146,6 +146,7 @@ class _CategoryCardTabState extends State<CityTab> {
         PagingTable(
           source: categoryDataSource,
           pageCount: categoryDataSource.orders.length / _rowsPerPage,
+
         ),
       ],
     );

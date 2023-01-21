@@ -18,28 +18,26 @@ class MainPage extends StatelessWidget {
           create: (_) => sl<LogoutCubit>(),
         ),
       ],
-      child: const Material(
-        child: SidebarResponsive(
-          listMenu: <SidebarDrawerItem>[
-            SidebarDrawerItem(
-              title: "World",
-              icon: Icon(Icons.view_carousel_outlined),
-            ),
-            SidebarDrawerItem(
-              title: "Users",
-              icon: Icon(Icons.people_outline_outlined),
-            ),
-            SidebarDrawerItem(
-              title: "Pembayaran",
-              icon: Icon(Icons.payments_outlined),
-            ),
-          ],
-          body: <PageRouteInfo<dynamic>>[
-            WorldRoute(),
-            UsersRoute(),
-            PaymentRoute(),
-          ],
-        ),
+      child: const SidebarResponsive(
+        listMenu: <SidebarDrawerItem>[
+          SidebarDrawerItem(
+            title: "World",
+            icon: Icons.public_outlined,
+          ),
+          SidebarDrawerItem(
+            title: "Users",
+            icon: Icons.people_outline_outlined,
+          ),
+          SidebarDrawerItem(
+            title: "Pembayaran",
+            icon: Icons.payments_outlined,
+          ),
+        ],
+        body: <PageRouteInfo<dynamic>>[
+          WorldRoute(),
+          UsersRoute(),
+          PaymentRoute(),
+        ],
       ),
     );
   }

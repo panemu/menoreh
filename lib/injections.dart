@@ -39,6 +39,12 @@ void _bloc() {
   sl.registerFactory<UserInfoCubit>(() => UserInfoCubit(sl()));
   // Logout
   sl.registerFactory<LogoutCubit>(() => LogoutCubit(sl()));
+  // Country
+  sl.registerFactory<CountryCubit>(() => CountryCubit(sl()));
+  sl.registerFactory<CountryByIdCubit>(() => CountryByIdCubit(sl()));
+  sl.registerFactory<CountryPost>(() => CountryPost(sl()));
+  sl.registerFactory<CountryPut>(() => CountryPut(sl()));
+  sl.registerFactory<CountryDelete>(() => CountryDelete(sl()));
 }
 
 void _useCase() {
@@ -48,6 +54,12 @@ void _useCase() {
   sl.registerLazySingleton(() => AuthLogout(sl()));
   sl.registerLazySingleton(() => AuthPostLogin(sl()));
   sl.registerLazySingleton(() => AuthPostRegister(sl()));
+  // Country
+  sl.registerLazySingleton(() => CountryGetData(sl()));
+  sl.registerLazySingleton(() => CountryGetByIdData(sl()));
+  sl.registerLazySingleton(() => CountryPost(sl()));
+  sl.registerLazySingleton(() => CountryPut(sl()));
+  sl.registerLazySingleton(() => CountryDelete(sl()));
 }
 
 void _repository() {
@@ -55,10 +67,14 @@ void _repository() {
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(remoteDatasource: sl(), localDatasource: sl()),
   );
+  // Country
+  sl.registerLazySingleton<CountryRepository>(() => CountryRepositoryImpl(sl()));
 }
 
 void _dataSource() {
   // Login
   sl.registerLazySingleton<AuthRemoteDatasource>(() => AuthRemoteDatasourceImpl(sl()));
   sl.registerLazySingleton<AuthLocalDatasource>(() => AuthLocalDatasourceImpl());
+  // Country
+  sl.registerLazySingleton<CountryRemoteDatasource>(() => CountryRemoteDatasourceImpl(sl()));
 }

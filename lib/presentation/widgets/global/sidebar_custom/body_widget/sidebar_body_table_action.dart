@@ -234,7 +234,7 @@ class _PopupMenu extends StatelessWidget {
         width: AppDimens.size8X * 2,
         decoration: BoxDecoration(
           color: AppColors.white,
-          borderRadius: BorderRadius.circular(AppDimens.radiusLargeX),
+          borderRadius: BorderRadius.circular(AppDimens.radiusLarge),
           boxShadow: [AppShadows.button],
         ),
         child: Column(

@@ -9,11 +9,11 @@ class AuthRepositoryImpl extends AuthRepository {
   final AuthLocalDatasource localDatasource;
 
   @override
-  Future<Either<Failure, bool>> checkLogin() async {
+  Future<Either<Failure, AuthUserEntity>> checkLogin() async {
     try {
-      bool status = await localDatasource.checkLogin();
+      AuthUserEntity data = await localDatasource.checkLogin();
 
-      return Right(status);
+      return Right(data);
     } catch (e) {
       if (e is CacheException) {
         return Left(CacheFailure(message: e.message));

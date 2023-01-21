@@ -1,8 +1,10 @@
 // ignore_for_file: constant_identifier_names
 
 //! API Path
-const String LOGIN = 'auth/login';
+const String LOGIN = 'auth/authenticate';
 const String LOGOUT = 'auth/logout';
+const String COUNTRY = 'country';
+const String CITY = 'city';
 
 //! Hive BOX
 const String BOX_LOGIN = 'box_login';

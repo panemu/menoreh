@@ -20,14 +20,15 @@ class AuthUserModelAdapter extends TypeAdapter<AuthUserModel> {
       id: fields[0] as int,
       role: fields[1] as String,
       username: fields[2] as String,
-      permissions: (fields[3] as List).cast<String>(),
+      authToken: fields[3] as String,
+      permissions: (fields[4] as List).cast<String>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, AuthUserModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -35,6 +36,8 @@ class AuthUserModelAdapter extends TypeAdapter<AuthUserModel> {
       ..writeByte(2)
       ..write(obj.username)
       ..writeByte(3)
+      ..write(obj.authToken)
+      ..writeByte(4)
       ..write(obj.permissions);
   }
 

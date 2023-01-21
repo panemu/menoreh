@@ -21,7 +21,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   Future<AuthUserEntity> postLoginCredentials(AuthParamsEntity params) async {
     try {
       final data = await baseApi.postLogin(LOGIN, data: params.toJson());
-      return AuthUserModel.toJson(data);
+      return AuthUserModel.formJson(data);
     } catch (e) {
       if(e is AuthException) {
         throw AuthException(message: e.message);

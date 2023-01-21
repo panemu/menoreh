@@ -86,8 +86,8 @@ class AppDimens {
   static const Size imageAvatar = Size(140, 140);
   /// `Size(90, 90)`
   static const Size imageAvatarMobile = Size(90, 90);
-  /// 80
-  static const double appBarHeightM = 100.0;
+  /// 140
+  static const double appBarHeightM = 140.0;
   /// 68
   static const double appBarHeight = 68.0;
   /// 50

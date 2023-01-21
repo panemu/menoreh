@@ -169,7 +169,7 @@ class HitoryPaymentDataGridSource extends DataGridSource {
         packageName: _packages[i < _packages.length ? i : _random.nextInt(_packages.length - 1)],
         dateBuy: _date[i < _date.length ? i : _random.nextInt(_date.length - 1)],
         dateExp: _date[i < _date.length ? i : _random.nextInt(_date.length - 1)],
-        price: (1500.0 + _random.nextInt(100)).textDigitOnly,
+        price: '',
         statusPayment: _statusPayment[i < _statusPayment.length ? i : _random.nextInt(_statusPayment.length - 1)],
         methodPayment: _methodPayment[i < _methodPayment.length ? i : _random.nextInt(_methodPayment.length - 1)],
         status: _status[i < _status.length ? i : _random.nextInt(_status.length - 1)],

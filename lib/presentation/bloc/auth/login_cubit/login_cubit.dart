@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
 import 'package:menoreh_library/core/_core.dart';
@@ -16,18 +17,11 @@ class LoginCubit extends Cubit<LoginState> {
     final data = await postLogin.call(params);
 
     data.fold(
-      (failure) => emit(
-        state.copyWith(
-          status: AuthState.notLoggedIn,
-          errorMessage: failure.message,
-        ),
-      ),
-      (value) => emit(
-        state.copyWith(
-          status: AuthState.loggedIn,
-          userEntity: value,
-        ),
-      ),
+      (failure) => emit(state.copyWith(status: AuthState.notLoggedIn, errorMessage: failure.message)),
+      (value) {
+        emit(state.copyWith(status: AuthState.loggedIn, userEntity: value));
+        BaseApi.AUTHTOKEN = value.authToken;
+      },
     );
   }
 }

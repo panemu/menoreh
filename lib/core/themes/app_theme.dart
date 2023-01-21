@@ -47,6 +47,7 @@ class AppTheme {
         color: AppColors.primary,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        elevation: 0.5,
         backgroundColor: AppColors.white,
         selectedItemColor: AppColors.secondary,
         selectedLabelStyle: base.textTheme.bodyText2!.copyWith(fontSize: 13.0),
