@@ -99,3 +99,26 @@ class ColumnTableAction extends GridColumn {
           ),
         );
 }
+
+class ColumnTableText2 extends DataColumn {
+  /// the [width] : default is `240.0` and if size [isDesktop] the value [double.nan]
+  /// the [alignment] : default is [Alignment.centerLeft]
+  ColumnTableText2({
+    // required BuildContext context,
+    // required String columnName,
+    required String value,
+    Alignment? alignment,
+    double? width,
+  }) : super(
+          // columnName: columnName,
+          // width: (width != null)
+          //     ? width
+          //     : (context.isDesktop)
+          //         ? _kWidthRow
+          //         : double.nan,
+          label: Container(
+            alignment: alignment ?? Alignment.centerLeft,
+            child: Text(value, overflow: TextOverflow.ellipsis),
+          ),
+        );
+}

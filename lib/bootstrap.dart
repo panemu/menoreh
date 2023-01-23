@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import 'dart:async';
 import 'dart:developer';
 import 'package:hive_flutter/hive_flutter.dart';

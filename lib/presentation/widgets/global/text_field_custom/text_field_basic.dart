@@ -65,22 +65,7 @@ class TextFieldBasic extends StatelessWidget {
           style: style,
           decoration: decoration ??
               InputDecoration(
-                disabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.grey.shade50, width: 1),
-                  borderRadius: BorderRadius.circular(AppDimens.radiusMedium),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.grey.shade100, width: 1),
-                  borderRadius: BorderRadius.circular(AppDimens.radiusMedium),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: AppColors.secondary, width: 1.5),
-                  borderRadius: BorderRadius.circular(AppDimens.radiusMedium),
-                ),
-                alignLabelWithHint: true,
-                floatingLabelBehavior: FloatingLabelBehavior.never,
                 hintText: hint,
-                contentPadding: const EdgeInsets.all(AppDimens.paddingMedium),
                 suffixText: suffixText,
                 errorText: errorText,
               ),

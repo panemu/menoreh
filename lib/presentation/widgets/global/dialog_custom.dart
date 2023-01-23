@@ -265,14 +265,14 @@ class AppDialog {
     );
   }
 
-  static Future<T?> form<T>({
+  static Future<AnswerState?> form({
     required BuildContext context,
     required String title,
     required Widget content,
     bool? isDismiss = false,
-    required VoidCallback? onSubmitted,
-    VoidCallback? onBack,
-    double? heightReduce = 0,
+    String? labelYesOk = 'Save',
+    String? labelCancel = 'Cancel',
+    bool? isScrollable = false,
   }) {
     late List<Widget> structure = [];
     late List<Widget> action = [];
@@ -281,116 +281,106 @@ class AppDialog {
 
     action.addAll([
       ElevatedButton(
-        onPressed: () {
-          context.router.pop();
-          onBack!.call();
-        },
+        onPressed: () => context.router.pop<AnswerState>(AnswerState.cancel),
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.fillTertiary,
           foregroundColor: AppColors.labelSecondary,
         ),
-        child: const Text('Batal'),
+        child: Text(labelCancel!),
       ),
       SizedBox(width: AppDimens.size2M),
       ElevatedButton(
-        onPressed: () => onSubmitted!.call(),
-        child: const Text('Simpan'),
+        onPressed: () => () => context.router.pop<AnswerState>(AnswerState.yesOk),
+        child: Text(labelYesOk!),
       ),
     ]);
 
-    return showDialog<T>(
+    return showDialog<AnswerState>(
       context: context,
       barrierDismissible: isDismiss!,
       builder: (context) {
-        return Dialog(
-          insetPadding: EdgeInsets.symmetric(horizontal: AppDimens.sizeXL, vertical: AppDimens.sizeL),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimens.radiusLargeX)),
-          child: Container(
-            width: context.maxWidthDialog,
-            height: context.maxHeightDialogDetail - heightReduce!,
-            padding: EdgeInsets.symmetric(horizontal: AppDimens.sizeXL, vertical: AppDimens.size2L),
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (var i = 0; i < structure.length; i++) structure[i],
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: content,
+        return Wrap(
+          alignment: WrapAlignment.center,
+          runAlignment: WrapAlignment.center,
+          children: [
+            Container(
+              width: context.maxWidthDialog,
+              constraints: isScrollable!
+                  ? BoxConstraints(
+                      maxHeight: context.maxHeightDialogDetail,
+                    )
+                  : const BoxConstraints(),
+              padding: EdgeInsets.symmetric(horizontal: AppDimens.sizeXL, vertical: AppDimens.size2L),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(AppDimens.radiusLargeX),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (var i = 0; i < structure.length; i++) structure[i],
+                  Expanded(
+                    flex: isScrollable ? 1 : 0,
+                    child: SingleChildScrollView(
+                      child: content,
+                    ),
                   ),
-                ),
-                SizedBox(height: AppDimens.size2L),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: action,
-                ),
-              ],
+                  SizedBox(height: AppDimens.size2L),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: action,
+                  ),
+                ],
+              ),
             ),
-          ),
+          ],
         );
       },
     );
   }
 
-  static Future<T?> detail<T>({
+  static Future<DatailDialogState?> detail({
     required BuildContext context,
-    required String title,
-    required List<Widget> content,
+    String? title = 'Detail',
+    required Widget content,
     bool? isDismiss = true,
     String? imageUrl,
-    String editText = 'Ubah',
-    String deleteText = 'Hapus',
+    String? labelEdit = 'Ubah',
+    String? labelDelete = 'Hapus',
     Color? editColor,
     Color? deleteColor,
-    double? heightReduce = 0,
-    VoidCallback? onEdit,
-    VoidCallback? onDelete,
-    VoidCallback? onClose,
+    bool? isScrollable = false,
   }) {
     late List<Widget> structure = [];
     late List<Widget> action = [];
 
-    structure.addAll([Text(title, style: AppTextStyle.dialogTitle), SizedBox(height: AppDimens.sizeL)]);
+    structure.addAll([Text(title!, style: AppTextStyle.dialogTitle), SizedBox(height: AppDimens.sizeL)]);
 
-    if (imageUrl != null && context.width < 600) {
-      content.insert(
-        0,
-        SizedBox(
-          width: AppDimens.imageAvatarMobile.width,
-          height: AppDimens.imageAvatarMobile.height,
-          child: ClickableImageWidget(
-            imageUrl: imageUrl,
-            radius: AppDimens.radiusLargeX,
-            size: AppDimens.imageAvatarMobile,
-          ),
-        ),
-      );
-    }
-
-    if (onDelete != null) {
+    if (labelDelete!.isNotEmpty) {
       action.addAll([
         ElevatedButton(
-          onPressed: onDelete,
+          onPressed: () => context.router.pop<DatailDialogState>(DatailDialogState.delete),
           style: ElevatedButton.styleFrom(backgroundColor: deleteColor ?? AppColors.red),
-          child: Text(deleteText),
+          child: Text(labelDelete),
         ),
         SizedBox(width: AppDimens.size2M),
       ]);
     }
 
-    if (onEdit != null) {
+    if (labelEdit!.isNotEmpty) {
       action.add(
         ElevatedButton(
-          onPressed: onEdit,
+          onPressed: () => context.router.pop<DatailDialogState>(DatailDialogState.edit),
           style: ElevatedButton.styleFrom(backgroundColor: editColor ?? AppColors.green),
-          child: Text(editText),
+          child: Text(labelEdit),
         ),
       );
     }
 
-    return showDialog<T>(
+    return showDialog<DatailDialogState>(
       context: context,
       barrierDismissible: isDismiss!,
       builder: (context) {
@@ -400,8 +390,12 @@ class AppDialog {
           children: [
             Container(
               width: context.maxWidthDialogDetail,
-              height: context.maxHeightDialogDetail - heightReduce!,
-              alignment: Alignment.center,
+              constraints: isScrollable!
+                  ? BoxConstraints(
+                      maxHeight: context.maxHeightDialogDetail,
+                    )
+                  : const BoxConstraints(),
+              alignment: Alignment.topCenter,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(AppDimens.radiusLargeX),
@@ -409,10 +403,7 @@ class AppDialog {
               child: Stack(
                 children: [
                   IconCloseButton(
-                    onPressed: () {
-                      context.router.pop();
-                      onClose!.call();
-                    },
+                    onPressed: () => context.router.pop<DatailDialogState>(DatailDialogState.close),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppDimens.sizeXL, vertical: AppDimens.size2L),
@@ -422,16 +413,14 @@ class AppDialog {
                       children: [
                         for (var i = 0; i < structure.length; i++) structure[i],
                         Expanded(
+                          flex: isScrollable ? 1 : 0,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
-                                child: ListView.separated(
-                                  shrinkWrap: true,
-                                  itemCount: content.length,
-                                  itemBuilder: (_, index) => content[index],
-                                  separatorBuilder: (_, __) => Divider(height: AppDimens.sizeL),
+                                child: SingleChildScrollView(
+                                  child: content,
                                 ),
                               ),
                               if (imageUrl != null)

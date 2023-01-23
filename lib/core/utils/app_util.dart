@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:menoreh_library/core/_core.dart';
 
 class AppUtils {
@@ -35,6 +36,17 @@ class AppUtils {
         return 'video/';
       default:
         return '';
+    }
+  }
+
+  static Color roleColor(String name) {
+    switch (name.toLowerCase()) {
+      case 'admin' : 
+      return AppColors.purple;
+      case 'read':
+      return AppColors.green;
+      default:
+      return AppColors.blue;
     }
   }
 

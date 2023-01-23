@@ -27,3 +27,6 @@ enum TypeState { initial, loading, loaded, notLoaded }
 
 /// state of dialog
 enum AnswerState { cancel, yesOk, third }
+
+/// state of detail dialog
+enum DatailDialogState { close, edit, delete }

@@ -15,14 +15,16 @@ class CountryTab extends StatefulWidget {
 }
 
 class _ListCardTabState extends State<CountryTab> {
-  final int _rowsPerPage = 15;
+  final int _rowsPerPage = 50;
   late CountryGridSource countrySource;
+  late DataPagerController controller;
   double pageCount = 0;
 
   @override
   void initState() {
     super.initState();
-    countrySource = CountryGridSource(countryEntity: [], countryCount: 0);
+    countrySource = CountryGridSource(context, countryEntity: [], countryCount: 0);
+    controller = DataPagerController();
   }
 
   @override
@@ -33,20 +35,19 @@ class _ListCardTabState extends State<CountryTab> {
           create: (context) => sl<CountryCubit>()..getAllData(const CountryParamsEntity()),
         ),
       ],
-      child: BlocListener<CountryCubit, CountryState>(
-        listener: (_, state) {
+      child: BlocConsumer<CountryCubit, CountryState>(
+        listener: (context, state) {
           if (state.status.isLoaded) {
             setState(() {
               countrySource = CountryGridSource(
+                context,
                 countryEntity: state.countryEntity!.rows,
                 countryCount: state.countryEntity!.totalRows,
               );
-
-              pageCount = countrySource.countryEntity.length / _rowsPerPage;
             });
           }
         },
-        child: Column(
+        builder: (context, state) => Column(
           children: <Widget>[
             SidebarBodyCard(
               contents: [
@@ -75,13 +76,13 @@ class _ListCardTabState extends State<CountryTab> {
             Divider(height: AppDimens.sizeZero),
             SidebarBodyAction(
               onSearch: (value) {},
-              onAdd: () => AppDialog.form(
-                context: context,
-                title: 'Tambah Kartu',
-                heightReduce: AppDimens.size4XL,
-                content: const ListCardAddForm(),
-                onSubmitted: () {},
-              ),
+              onAdd: () async {
+                final answerState = await AppDialog.form(
+                  context: context,
+                  title: 'Add Country',
+                  content: const CountryFormPage(),
+                );
+              },
               onFilter: () => AppDialog.filter<bool>(
                 context: context,
                 title: 'Filter Kartu',
@@ -108,115 +109,62 @@ class _ListCardTabState extends State<CountryTab> {
                 // onSubmitted: () {},
               ),
             ),
-            Expanded(
-              child: MainTable(
-                source: countrySource,
-                rowsPerPage: _rowsPerPage,
-                onCellTap: (DataGridCellTapDetails details) {
-                  if (details.rowColumnIndex.rowIndex != 0) {
-                    // final DataGridRow row = countrySource.effectiveRows[details.rowColumnIndex.rowIndex - 1];
-                    // int index = countrySource.dataGridRows.indexOf(row);
+            if (state.status.isLoaded)
+              Expanded(
+                child: MainTable(
+                  source: countrySource,
+                  rowsPerPage: _rowsPerPage,
+                  onCellTap: (DataGridCellTapDetails details) async {
+                    final DataGridRow row = countrySource.effectiveRows[details.rowColumnIndex.rowIndex - 1];
+                    int id = row.getCells().first.value;
 
-                    AppDialog.detail(
-                      context: context,
-                      title: 'Detail kartu',
-                      heightReduce: AppDimens.size8X,
-                      content: [
-                        const ListRowBasic(
-                          label: 'Konten',
-                          value: 'Siapa orang terakhir yang kamu hubungi di WhatsApp?',
-                          multiLine: true,
-                        ),
-                        const ListRowChip(label: 'Tipe', value: 'Rasa Karsa', colorClip: AppColors.blue),
-                        const ListRowChip(label: 'Kategori', value: 'Nongkrong', colorClip: AppColors.tial),
-                        const ListRowChip(label: 'Status', value: 'Aktif', colorClip: AppColors.green),
-                        ListRowHighline(
-                          onAdd: () => AppDialog.form(
-                            context: context,
-                            title: 'Tambahkan highline',
-                            heightReduce: AppDimens.sizeXL,
-                            content: Column(
-                              children: [
-                                TextFieldDropdown(
-                                  title: 'Kata',
-                                  hint: 'Pilih kata',
-                                  items: 'Siapa orang terakhir yang kamu hubungi di WhatsApp?'.split(' '),
-                                ),
-                                SizedBox(height: AppDimens.size4M),
-                                const TextFieldBasic(
-                                  title: 'Deskripsi',
-                                  hint: 'Masukan deskripsi',
-                                  multiline: true,
-                                ),
-                                SizedBox(height: AppDimens.size4M),
-                                const TextFieldBasic(
-                                  title: 'Link sumber',
-                                  hint: 'Masukan link sumber',
-                                ),
-                                SizedBox(height: AppDimens.size4M),
-                                TextFieldPicker(
-                                  title: 'Gambar pendukung',
-                                  fileType: FileType.image,
-                                  onDone: (files) {},
-                                ),
-                              ],
-                            ),
-                            onSubmitted: () {},
-                          ),
-                          label: 'Highline',
-                          listValue: [
-                            ListRowHighlineValue(
-                              onClick: () => AppDialog.detail(
-                                context: context,
-                                heightReduce: AppDimens.size8X * 2,
-                                title: 'Detail highline',
-                                imageUrl: AppImages.avatarUrl,
-                                content: [
-                                  const ListRowBasic(label: 'Kata', value: 'Whatapp'),
-                                  const ListRowBasic(
-                                    label: 'Konten',
-                                    value: 'Phasellus consectetur facilisis',
-                                    multiLine: true,
-                                  ),
-                                  ListRowLink(label: 'Link sumber', onClick: () {}),
-                                  ListRowBasic(label: 'Tgl dibuat', value: 1651538822143.formMillisecondsSinceEpoch),
-                                  ListRowBasic(label: 'Tgl diubah', value: 1651538822143.formMillisecondsSinceEpoch),
-                                ],
-                              ),
-                              value: 'Whatsapp',
-                            ),
-                          ],
-                        ),
-                        ListRowBasic(label: 'Tgl dibuat', value: 1651538822143.formMillisecondsSinceEpoch),
-                        ListRowBasic(label: 'Tgl diubah', value: 1651538822143.formMillisecondsSinceEpoch),
-                      ],
-                      onDelete: () => AppDialog.confirm(
+                    if (details.rowColumnIndex.rowIndex != 0) {
+                      final detailState = await AppDialog.detail(
                         context: context,
-                        title: 'Hapus kartu',
-                        description: 'Apakah anda yakin ingin menghapus kartu ini?',
-                        // submittedColor: AppColors.red,
-                        // submitted: 'Hapus',
-                        // onSubmitted: () {},
-                      ),
-                      onEdit: () {},
-                    );
-                  }
-                },
-                columns: <GridColumn>[
-                  ColumnTableId(context: context, value: 'Number'),
-                  ColumnTableText(context: context, columnName: 'name', value: 'Name'),
-                  ColumnTableText(context: context, columnName: 'capital', value: 'Capital City', width: double.nan),
-                  ColumnTableText(context: context, columnName: 'continent', value: 'Continent', width: double.nan),
-                  ColumnTableText(
-                      context: context, columnName: 'independence', value: 'Independence Day', width: double.nan),
-                  ColumnTableText(context: context, columnName: 'population', value: 'Population', width: double.nan),
-                ],
+                        content: CountryDetailPage(
+                          country: state.countryEntity!.rows.firstWhere((element) => element.id == id),
+                        ),
+                      );
+
+                      if (detailState!.isEdit) {
+                        AppDialog.form(
+                          context: context,
+                          title: 'Edit',
+                          content: CountryFormPage(
+                            country: state.countryEntity!.rows.firstWhere((element) => element.id == id),
+                          ),
+                        );
+                      }
+
+                      if (detailState.isDelete) {
+                        AppDialog.confirm(
+                          context: context,
+                          title: 'Delete Country',
+                          description: 'Apakah anda yakin ingin menghapus kartu ini?',
+                        );
+                      }
+                    }
+                  },
+                  columns: <GridColumn>[
+                    ColumnTableId(context: context, value: 'No'),
+                    ColumnTableText(context: context, columnName: 'name', value: 'Name'),
+                    ColumnTableText(context: context, columnName: 'capital', value: 'Capital City', width: double.nan),
+                    ColumnTableText(context: context, columnName: 'continent', value: 'Continent', width: double.nan),
+                    ColumnTableText(
+                        context: context, columnName: 'independence', value: 'Independence Day', width: double.nan),
+                    ColumnTableNumber(
+                        context: context, columnName: 'population', value: 'Population', width: double.nan),
+                  ],
+                ),
               ),
-            ),
-            PagingTable(
-              source: countrySource,
-              pageCount: pageCount,
-            ),
+            if (state.status.isLoaded)
+              PagingTable(
+                source: countrySource,
+                pageCount: (countrySource.rows.length / _rowsPerPage).ceilToDouble(),
+                controller: controller,
+              ),
+            if (state.status.isLoading) const Expanded(child: Center(child: CircularProgressIndicator())),
+            if (state.status.isNotLoaded) Expanded(child: Center(child: Text(state.errorMessage!))),
           ],
         ),
       ),

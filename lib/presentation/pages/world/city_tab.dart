@@ -56,7 +56,6 @@ class _CategoryCardTabState extends State<CityTab> {
             context: context,
             title: 'Tambah Kategori',
             content: const CityAddForm(),
-            onSubmitted: () {},
           ),
           onFilter: () => AppDialog.filter<bool>(
             context: context,
@@ -93,36 +92,7 @@ class _CategoryCardTabState extends State<CityTab> {
                 // final DataGridRow row = cardDataSource.effectiveRows[details.rowColumnIndex.rowIndex - 1];
                 // int index = cardDataSource.dataGridRows.indexOf(row);
 
-                AppDialog.detail(
-                  context: context,
-                  title: 'Detail kategori',
-                  heightReduce: AppDimens.sizeXL,
-                  imageUrl: AppImages.avatarUrl,
-                  content: [
-                    const ListRowBasic(label: 'Nama', value: 'Perkenalan'),
-                    const ListRowChip(label: 'Tipe', value: 'Rasa Karsa', colorClip: AppColors.blue),
-                    const ListRowChip(label: 'Status', value: 'Aktif', colorClip: AppColors.green),
-                    const ListRowBasic(
-                      label: 'Deskripsi',
-                      value: 'Phasellus consectetur facilisis',
-                      multiLine: true,
-                    ),
-                    const ListRowBasic(label: 'Jumlah kartu', value: '20 kartu'),
-                    const ListRowBasic(label: 'Jumlah pemain', value: '4-6 pemain'),
-                    const ListRowBasic(label: 'Tags', value: 'Umum, Lawan jenis'),
-                    ListRowBasic(label: 'Tgl dibuat', value: 1651538822143.formMillisecondsSinceEpoch),
-                    ListRowBasic(label: 'Tgl diubah', value: 1651538822143.formMillisecondsSinceEpoch),
-                  ],
-                  onDelete: () => AppDialog.confirm(
-                    context: context,
-                    title: 'Hapus kategori',
-                    description: 'Apakah anda yakin ingin menghapus kategori ini?',
-                    // submittedColor: AppColors.red,
-                    // submitted: 'Hapus',
-                    // onSubmitted: () {},
-                  ),
-                  onEdit: () {},
-                );
+               
               }
             },
             columnWidthMode: ColumnWidthMode.none,

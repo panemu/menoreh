@@ -23,27 +23,39 @@ class RowTableBasic extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.all(AppDimens.paddingSmallX),
         alignment: Alignment.centerLeft,
-        child: ChipWidget(
-          chipType: ChipType.light,
-          color: chipColor!,
-          value: value,
+        child: Offstage(
+          offstage: value.isEmpty,
+          child: ChipWidget(
+            chipType: ChipType.light,
+            color: chipColor!,
+            value: value,
+          ),
         ),
       );
     } else if (tableType.isNumber) {
       return Container(
         padding: const EdgeInsets.all(AppDimens.paddingSmallX),
         alignment: Alignment.centerRight,
-        child: Text(value, overflow: TextOverflow.ellipsis),
+        child: Offstage(
+          offstage: value.isEmpty,
+          child: Text(
+            value,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
       );
     } else if (tableType.isLink) {
       return Container(
         padding: const EdgeInsets.all(AppDimens.paddingSmallX),
         alignment: Alignment.centerLeft,
-        child: Text(
-          value,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            color: AppColors.blue,
+        child: Offstage(
+          offstage: value.isEmpty,
+          child: Text(
+            value,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              color: AppColors.blue,
+            ),
           ),
         ),
       );
@@ -51,9 +63,12 @@ class RowTableBasic extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.all(AppDimens.paddingSmallX),
         alignment: Alignment.centerLeft,
-        child: Text(
-          value.isEmpty ? '-' : value,
-          overflow: TextOverflow.ellipsis,
+        child: Offstage(
+          offstage: value.isEmpty,
+          child: Text(
+            value.isEmpty ? '-' : value,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       );
     }

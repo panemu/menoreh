@@ -51,21 +51,6 @@ class _LogUsersTabState extends State<LogUsersTab> {
                 // final DataGridRow row = logUsersDataSource.effectiveRows[details.rowColumnIndex.rowIndex - 1];
                 // int index = logUsersDataSource.dataGridRows.indexOf(row);
 
-                AppDialog.detail(
-                  context: context,
-                  title: 'Detail Log',
-                  heightReduce: AppDimens.size6X * 2,
-                  imageUrl: AppImages.avatarUrl,
-                  content: [
-                    const ListRowBasic(label: 'User', value: 'Esther Howard'),
-                    const ListRowBasic(label: 'Kondisi', value: 'LOGOUT'),
-                    const ListRowBasic(label: 'Tipe Perangkat', value: 'IOS'),
-                    const ListRowBasic(label: 'Address IP', value: '117.20.48.97'),
-                    const ListRowChip(label: 'Metode', value: 'Google', colorClip: AppColors.red),
-                    const ListRowChip(label: 'Role', value: 'Admin', colorClip: AppColors.green),
-                    ListRowBasic(label: 'Tanggal', value: 1651538822143.formMillisecondsSinceEpoch),
-                  ],
-                );
               }
             },
             columns: <GridColumn>[

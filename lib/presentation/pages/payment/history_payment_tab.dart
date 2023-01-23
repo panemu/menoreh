@@ -76,53 +76,7 @@ class _HistoryPaymentTabState extends State<HistoryPaymentTab> {
                 // final DataGridRow row = cardDataSource.effectiveRows[details.rowColumnIndex.rowIndex - 1];
                 // int index = cardDataSource.dataGridRows.indexOf(row);
 
-                AppDialog.detail(
-                  context: context,
-                  title: 'Detail riwayat pembayaran',
-                  heightReduce: AppDimens.size8X,
-                  imageUrl: AppImages.avatarUrl,
-                  content: [
-                    ListRowLink(
-                      label: 'Nama',
-                      value: 'Esther Howard',
-                      onClick: () {},
-                    ),
-                    const ListRowBasic(label: 'Nama paket', value: 'FREE'),
-                    ListRowBasic(label: 'Tgl Pembayaran', value: 1651538822143.formMillisecondsSinceEpoch),
-                    ListRowBasic(label: 'Tgl kadaluarsa', value: 1651538823143.formMillisecondsSinceEpoch),
-                    const ListRowBasic(label: 'Harga', value: 'Rp. 49.000,00'),
-                    const ListRowChip(label: 'Status pembayaran', value: 'Terbayar', colorClip: AppColors.green),
-                    const ListRowChip(label: 'Metode pembayaran', value: 'IAP', colorClip: AppColors.purple),
-                    const ListRowChip(label: 'Status', value: 'Aktif', colorClip: AppColors.green),
-                  ],
-                  editText: 'Ubah pembayaran',
-                  editColor: AppColors.orange,
-                  onEdit: () => AppDialog.form(
-                    context: context,
-                    title: 'Ubah pembayaran',
-                    heightReduce: AppDimens.size8X * 3 - AppDimens.sizeXL,
-                    content: Column(
-                      children: [
-                        TextFieldDropdown(
-                          onChanged: (value) {},
-                          title: 'Status pembayaran',
-                          hint: 'Pilih status',
-                          selectedItem: 'Terbayar',
-                          items: const ['Terbayar', 'Pending', 'Gagal'],
-                        ),
-                        SizedBox(height: AppDimens.size3M),
-                        TextFieldDropdown(
-                          onChanged: (value) {},
-                          title: 'Status',
-                          hint: 'Pilih status',
-                          selectedItem: 'Aktif',
-                          items: const ['Aktif', 'Tidak aktif'],
-                        ),
-                      ],
-                    ),
-                    onSubmitted: () {},
-                  ),
-                );
+                
               }
             },
             columnWidthMode: ColumnWidthMode.auto,

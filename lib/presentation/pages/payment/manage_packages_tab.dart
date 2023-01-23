@@ -37,7 +37,7 @@ class _ManagePackagesTabState extends State<ManagePackagesTab> {
             context: context,
             title: 'Tambah paket',
             content: const ManagePackageAddForm(),
-            onSubmitted: () {},
+            // onSubmitted: () {},
           ),
           onExport: () => AppDialog.confirm(
             context: context,
@@ -56,37 +56,7 @@ class _ManagePackagesTabState extends State<ManagePackagesTab> {
                 // final DataGridRow row = cardDataSource.effectiveRows[details.rowColumnIndex.rowIndex - 1];
                 // int index = cardDataSource.dataGridRows.indexOf(row);
 
-                AppDialog.detail(
-                  context: context,
-                  title: 'Detail paket',
-                  heightReduce: AppDimens.size8X,
-                  content: [
-                    const ListRowBasic(label: 'Nama', value: 'KELUARGA'),
-                    const ListRowBasic(label: 'Masa aktif', value: '1 hari'),
-                    ListRowLink(
-                      label: 'Daftar Fitur',
-                      onClick: () {},
-                    ),
-                    const ListRowBasic(
-                      label: 'Deskripsi',
-                      value: 'Phasellus consectetur facilisis',
-                      multiLine: true,
-                    ),
-                    const ListRowBasic(label: 'Harga', value: 'Rp. 149.000,00'),
-                    const ListRowChip(label: 'Status', value: 'Aktif', colorClip: AppColors.green),
-                    ListRowBasic(label: 'Tgl dibuat', value: 1651538822143.formMillisecondsSinceEpoch),
-                    ListRowBasic(label: 'Tgl diubah', value: 1651538822143.formMillisecondsSinceEpoch),
-                  ],
-                  onDelete: () => AppDialog.confirm(
-                    context: context,
-                    title: 'Hapus paket',
-                    description: 'Apakah anda yakin ingin menghapus paket ini?',
-                    // submittedColor: AppColors.red,
-                    // submitted: 'Hapus',
-                    // onSubmitted: () {},
-                  ),
-                  onEdit: () {},
-                );
+                
               }
             },
             columnWidthMode: ColumnWidthMode.auto,

@@ -4,5 +4,6 @@ export 'city_tab.dart';
 export 'city_add_form.dart';
 export 'city_filter_form.dart';
 export 'country_tab.dart';
-export 'country_add_form.dart';
+export 'country_form_page.dart';
 export 'country_filter_form.dart';
+export 'country_detail_page.dart';

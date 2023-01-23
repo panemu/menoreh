@@ -9,14 +9,14 @@ extension DateTimeExtension on DateTime {
   /// For [DateTime] formatting and return as [String]
   /// e.g `12 Agu 2022`
   String get yMMMd {
-    DateFormat formattor = DateFormat('dd MMM yyyy');
+    DateFormat formattor = DateFormat('dd MMM yyyy', 'id');
     return formattor.format(this);
   }
 
   /// For [DateTime] formatting and return as [String]
   /// e.g `12 January 2022`
   String get yMMMMd {
-    DateFormat formattor = DateFormat('dd MMMM yyyy');
+    DateFormat formattor = DateFormat('dd MMMM yyyy', 'id');
     return formattor.format(this);
   }
 
@@ -30,10 +30,10 @@ extension IntExtension on int {
   /// e.g `12 Agustus 2022 4:23 PM`
   String get formMillisecondsSinceEpoch {
     final date = DateTime.fromMillisecondsSinceEpoch(this);
-    return DateFormat.yMMMd().add_jm().format(date);
+    return DateFormat.yMMMd('id').add_jm().format(date);
   }
 
-  /// currency number to String 
+  /// currency number to String
   /// e,g `20000` convert to `Rp20.000.00`.
   String get textDigitOnly => (NumberFormat.simpleCurrency(locale: 'id', decimalDigits: 0, name: "Rp").format(this));
 
@@ -44,15 +44,13 @@ extension IntExtension on int {
 
 extension StringExtension on String {
   /// For [DATA] date formatting and return as [DateTime].
-  /// e.g `2022-10-01` convert to [DateTime] 
+  /// e.g `2022-10-01` convert to [DateTime]
   DateTime toDateTime({bool isHours = false}) {
     late DateFormat inputFormat;
     if (isHours) {
-      inputFormat = DateFormat(
-        'yyyy-MM-dd HH:mm:ss',
-      );
+      inputFormat = DateFormat('yyyy-MM-dd HH:mm:ss', 'id');
     } else {
-      inputFormat = DateFormat('yyyy-MM-dd');
+      inputFormat = DateFormat('yyyy-MM-dd', 'id');
     }
     return inputFormat.parse(this);
   }
@@ -60,7 +58,8 @@ extension StringExtension on String {
   /// for [String] formating to result as `Flutter is very good`
   String get capitalize => '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
 
-  /// String to currency number 
+  /// String to currency number
+  /// e.g `20,000` convert to `20000`
   String get numberDigitOnly => replaceAll(",", "");
 }
 
@@ -137,4 +136,10 @@ extension AuthStateEnum on AuthState {
   bool get isLoading => this == AuthState.loading;
   bool get isLoggedIn => this == AuthState.loggedIn;
   bool get isNotLoggedIn => this == AuthState.notLoggedIn;
+}
+
+extension DatailDialogStateEnum on DatailDialogState {
+  bool get isClose => this == DatailDialogState.close;
+  bool get isEdit => this == DatailDialogState.edit;
+  bool get isDelete => this == DatailDialogState.delete;
 }

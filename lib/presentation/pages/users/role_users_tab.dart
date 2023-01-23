@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
-import 'package:menoreh_library/core/_core.dart';
 import 'package:menoreh_library/presentation/_presentation.dart';
 
 class RoleUsersTab extends StatefulWidget {
@@ -29,9 +28,7 @@ class _RoleUsersTabState extends State<RoleUsersTab> {
           onAdd: () => AppDialog.form(
             context: context,
             title: 'Tambah role',
-            heightReduce: AppDimens.size4X * 2,
             content: const RoleUsersAddForm(),
-            onSubmitted: () {},
           ),
           onExport: () => AppDialog.confirm(
             context: context,
@@ -50,26 +47,7 @@ class _RoleUsersTabState extends State<RoleUsersTab> {
                 // final DataGridRow row = roleUsersDataSource.effectiveRows[details.rowColumnIndex.rowIndex - 1];
                 // int index = roleUsersDataSource.dataGridRows.indexOf(row);
 
-                AppDialog.detail(
-                  context: context,
-                  title: 'Detail Role',
-                  heightReduce: AppDimens.size4X * 4,
-                  content: [
-                    const ListRowBasic(label: 'Nama Role', value: 'ADMIN'),
-                    const ListRowBasic(label: 'Deskripsi', value: 'Phasellus consectetur facilisis', multiLine: true),
-                    const ListRowChip(label: 'Status', value: 'Aktif', colorClip: AppColors.green),
-                  ],
-                  editColor: AppColors.orange,
-                  onEdit: () => AppDialog.confirm(
-                    context: context,
-                    title: 'Status user',
-                    description: 'Ubah status dari role <ADMIN> ini',
-                    content: const TextFieldDropdown(
-                      selectedItem: 'Aktif',
-                      items: ['Aktif', 'Tidak aktif'],
-                    ),
-                  ),
-                );
+                
               }
             },
             columns: <GridColumn>[

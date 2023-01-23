@@ -67,21 +67,8 @@ class TextFieldDropdownSearch<T> extends StatelessWidget {
             ),
           ),
           dropdownDecoratorProps: DropDownDecoratorProps(
-            dropdownSearchDecoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.grey.shade100, width: 1),
-                borderRadius: BorderRadius.circular(AppDimens.radiusMedium),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.secondary, width: 1.5),
-                borderRadius: BorderRadius.circular(AppDimens.radiusMedium),
-              ),
-              hintText: hint,
-              alignLabelWithHint: true,
-              floatingLabelBehavior: FloatingLabelBehavior.never,
-              floatingLabelStyle: TextStyle(color: AppColors.labelSecondary),
-              contentPadding: const EdgeInsets.only(left: AppDimens.paddingMedium),
-            ),
+            baseStyle: const TextStyle(fontSize: 16.0),
+            dropdownSearchDecoration: InputDecoration(hintText: hint),
           ),
         ),
       ],

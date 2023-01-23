@@ -77,7 +77,8 @@ class SidebarBodyProfile extends StatelessWidget {
                 Offstage(
                   offstage: role.isEmpty,
                   child: ChipWidget(
-                    color: AppColors.purple,
+                    chipType: ChipType.light,
+                    color: AppUtils.roleColor(role),
                     value: role,
                     fontSize: 9.0,
                   ),
@@ -217,7 +218,8 @@ class _PopDetailProfile extends StatelessWidget {
                 Offstage(
                   offstage: role == null,
                   child: ChipWidget(
-                    color: AppColors.purple,
+                    chipType: ChipType.light,
+                    color: AppUtils.roleColor(role!),
                     value: role ?? '',
                     fontSize: AppDimens.sizeM,
                   ),

@@ -32,6 +32,7 @@ class AppColors {
   static const Color transparent = Colors.transparent;
   static const Color splash = Color(0x2AFFF8FF);
   static const Color listMenu = Color(0xFF1F3682);
+  static const Color rowTable = Color(0xFFFBFBFF);
 
   // border
   static final Color borderGrey = Colors.grey.shade300;

@@ -63,21 +63,23 @@ class _ContentBuilder extends StatelessWidget {
             mobile: AppDimens.sizeXL,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            TopLogin(),
-            LoginCredentials(),
-            VersioningLogin(),
-            // SizedBox(height: AppDimens.size2M),
-            // const DividerLogin(),
-            // SizedBox(height: AppDimens.size2M),
-            // const LoginFacebook(),
-            // SizedBox(height: AppDimens.sizeM),
-            // const LoginGoogle(),
-            // SizedBox(height: AppDimens.sizeM),
-            // const LoginApple(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const <Widget>[
+              TopLogin(),
+              LoginCredentials(),
+              VersioningLogin(),
+              // SizedBox(height: AppDimens.size2M),
+              // const DividerLogin(),
+              // SizedBox(height: AppDimens.size2M),
+              // const LoginFacebook(),
+              // SizedBox(height: AppDimens.sizeM),
+              // const LoginGoogle(),
+              // SizedBox(height: AppDimens.sizeM),
+              // const LoginApple(),
+            ],
+          ),
         ),
       ),
     );

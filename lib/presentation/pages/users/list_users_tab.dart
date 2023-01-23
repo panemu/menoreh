@@ -76,55 +76,7 @@ class _ListUsersTabState extends State<ListUsersTab> {
                 // final DataGridRow row = listUsersDataSource.effectiveRows[details.rowColumnIndex.rowIndex - 1];
                 // int index = listUsersDataSource.dataGridRows.indexOf(row);
 
-                AppDialog.detail(
-                  context: context,
-                  title: 'Detail user',
-                  heightReduce: AppDimens.sizeXL,
-                  imageUrl: AppImages.avatarUrl,
-                  content: [
-                    const ListRowBasic(label: 'Nama', value: 'Nanang prasetya'),
-                    const ListRowBasic(label: 'Email', value: 'nanang@mail.com'),
-                    const ListRowBasic(label: 'UUID', value: 'vP7BDuLD'),
-                    const ListRowBasic(label: 'Paket', value: 'FREE'),
-                    const ListRowChip(label: 'Role', value: 'Admin', colorClip: AppColors.purple),
-                    const ListRowChip(label: 'Metode', value: 'Google', colorClip: AppColors.red),
-                    const ListRowChip(label: 'Status', value: 'Aktif', colorClip: AppColors.green),
-                    ListRowBasic(label: 'Tgl dibuat', value: 1651538822143.formMillisecondsSinceEpoch),
-                    ListRowBasic(label: 'Tgl diubah', value: 1651538822143.formMillisecondsSinceEpoch),
-                  ],
-                  editText: 'Ubah user',
-                  editColor: AppColors.orange,
-                  onEdit: () => AppDialog.form(
-                    context: context,
-                    title: 'Ubah user',
-                    heightReduce: AppDimens.size7X * 2,
-                    content: Column(
-                      children: [
-                        const TextFieldDropdown(
-                          title: 'Role',
-                          selectedItem: 'Manager',
-                          items: ['Admin', 'Manager', 'User'],
-                        ),
-                        SizedBox(height: AppDimens.size4M),
-                        TextFieldDropdownSearch<String>(
-                          onChanged: (String? value) {},
-                          title: 'Paket',
-                          selectedItem: 'FREE',
-                          itemAsString: (element) => element.toString(),
-                          compareFn: (selected, val) => val == null ? false : selected == val,
-                          items: const ['FREE', 'KENCAN', 'TEMAN', 'NONGKRONG', 'KELUARGA'],
-                        ),
-                        SizedBox(height: AppDimens.size4M),
-                        const TextFieldDropdown(
-                          title: 'Status',
-                          selectedItem: 'Aktif',
-                          items: ['Aktif', 'Tidak aktif'],
-                        ),
-                      ],
-                    ),
-                    onSubmitted: () {},
-                  ),
-                );
+                
               }
             },
             columns: <GridColumn>[
