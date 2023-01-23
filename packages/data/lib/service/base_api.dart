@@ -15,7 +15,7 @@ class BaseApi {
   static String AUTHTOKEN = '';
 
   static PrettyDioLogger _logger = PrettyDioLogger(
-    responseBody: true,
+    responseBody: false,
     request: false,
     requestBody: false,
     responseHeader: false,
@@ -51,7 +51,8 @@ class BaseApi {
         onReceiveProgress: onReceiveProgress,
       );
       return response.data;
-    } catch (e) {
+    } catch (e, s) {
+      log(e.toString(), stackTrace: s);
       if (e is DioError) {
         throw ServerException.fromDioError(e);
       } else {
@@ -69,7 +70,6 @@ class BaseApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    print(AUTHTOKEN);
     try {
       final BaseOptions _options = BaseOptions(
         baseUrl: FlavorConfig.instance.values!.baseApi!,
@@ -94,7 +94,8 @@ class BaseApi {
         onReceiveProgress: onReceiveProgress,
       );
       return response.data;
-    } catch (e) {
+    } catch (e, s) {
+      log(e.toString(), stackTrace: s);
       if (e is DioError) {
         throw ServerException.fromDioError(e);
       } else {
@@ -127,7 +128,8 @@ class BaseApi {
         cancelToken: cancelToken,
       );
       return response.data;
-    } catch (e) {
+    } catch (e, s) {
+      log(e.toString(), stackTrace: s);
       if (e is DioError) {
         throw ServerException.fromDioError(e);
       } else {
@@ -169,7 +171,8 @@ class BaseApi {
         onReceiveProgress: onReceiveProgress,
       );
       return response.data;
-    } catch (e) {
+    } catch (e, s) {
+      log(e.toString(), stackTrace: s);
       if (e is DioError) {
         throw ServerException.fromDioError(e);
       } else {

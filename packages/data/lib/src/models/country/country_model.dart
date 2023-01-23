@@ -43,12 +43,12 @@ class CountryModel extends CountryEntity {
   factory CountryModel.fromJson(Map<String, dynamic> json) {
     return CountryModel(
       id: json['id'] as int,
-      capital: json['capital'] as String,
-      continent: json['continent'] as String,
-      independence: json['independence'] as String,
-      name: json['name'] as String,
-      population: json['population'] as int,
-      version: json['version'] as int,
+      name: json['name'] ?? '',
+      capital: json['capital'] ?? '',
+      continent: json['continent'] ?? '' ,
+      independence: json['independence'] ?? '',
+      version: json['version']  ?? '',
+      population: json['population'] ?? 0,
     );
   }
 }

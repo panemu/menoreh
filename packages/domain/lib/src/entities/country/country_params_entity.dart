@@ -8,7 +8,7 @@ class CountryParamsEntity extends Equatable {
 
   const CountryParamsEntity({
     this.start = 0,
-    this.max = 15,
+    this.max = 999,
     this.tableQuery = const TableQueryEntity(
       tableCriteria: [],
       sortingInfos: [],
