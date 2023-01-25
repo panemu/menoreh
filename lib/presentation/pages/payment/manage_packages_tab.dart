@@ -25,14 +25,14 @@ class _ManagePackagesTabState extends State<ManagePackagesTab> {
     return Column(
       children: [
         SidebarBodyAction(
-          onSearch: (value) {},
-          onFilter: () => AppDialog.filter<bool>(
-            context: context,
-            title: 'Filter paket',
-            content: const ManagePackageFilterForm(),
-            onSubmitted: () {},
-            onReset: () {},
-          ),
+          searchReceptacle: SerachReceptacle(onSearch: (value) {}),
+          // filterReceptacle: FilterReceptacle(onFilter: () => AppDialog.filter<bool>(
+          //   context: context,
+          //   title: 'Filter paket',
+          //   content: const ManagePackageFilterForm(),
+          //   onSubmitted: () {},
+          //   onReset: () {},
+          // ),),
           onAdd: () => AppDialog.form(
             context: context,
             title: 'Tambah paket',
@@ -56,7 +56,6 @@ class _ManagePackagesTabState extends State<ManagePackagesTab> {
                 // final DataGridRow row = cardDataSource.effectiveRows[details.rowColumnIndex.rowIndex - 1];
                 // int index = cardDataSource.dataGridRows.indexOf(row);
 
-                
               }
             },
             columnWidthMode: ColumnWidthMode.auto,
@@ -76,7 +75,6 @@ class _ManagePackagesTabState extends State<ManagePackagesTab> {
         PagingTable(
           source: managePackageDataSource,
           pageCount: managePackageDataSource.orders.length / _rowsPerPage,
-
         ),
       ],
     );

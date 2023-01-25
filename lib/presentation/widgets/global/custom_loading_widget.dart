@@ -14,7 +14,7 @@ class CustomLoadingWidget extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(AppDimens.radiusLarge)),
             color: AppColors.grey.shade800,
           ),
-          padding: EdgeInsets.all(AppDimens.sizeXL),
+          padding: EdgeInsets.symmetric(horizontal: AppDimens.sizeXL, vertical: AppDimens.size4L),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,

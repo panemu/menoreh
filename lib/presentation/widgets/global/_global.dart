@@ -11,3 +11,5 @@ export 'tab_indicator.dart';
 export 'image_view_widget.dart';
 export 'clickable_image_widget.dart';
 export 'custom_loading_widget.dart';
+export 'content_dialog_form.dart';
+export 'badge_notification.dart';

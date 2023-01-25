@@ -32,7 +32,18 @@ class CountryRequestEntity extends Equatable {
     ];
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toPostJson() {
+    return <String, dynamic>{
+      'id': id,
+      'capital': capital,
+      'continent': continent,
+      'independence': independence,
+      'name': name,
+      'population': population,
+    };
+  }
+
+  Map<String, dynamic> toPutJson() {
     return <String, dynamic>{
       'id': id,
       'capital': capital,
@@ -46,4 +57,24 @@ class CountryRequestEntity extends Equatable {
 
   @override
   bool get stringify => true;
+
+  CountryRequestEntity copyWith({
+    int? id,
+    String? capital,
+    String? continent,
+    String? independence,
+    String? name,
+    int? population,
+    int? version,
+  }) {
+    return CountryRequestEntity(
+      id: id ?? this.id,
+      capital: capital ?? this.capital,
+      continent: continent ?? this.continent,
+      independence: independence ?? this.independence,
+      name: name ?? this.name,
+      population: population ?? this.population,
+      version: version ?? this.version,
+    );
+  }
 }

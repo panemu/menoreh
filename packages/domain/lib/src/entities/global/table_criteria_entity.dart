@@ -18,4 +18,14 @@ class TableCriteriaEntity extends Equatable {
       'value': value,
     };
   }
+
+  TableCriteriaEntity copyWith({
+    String? attributeName,
+    String? value,
+  }) {
+    return TableCriteriaEntity(
+      attributeName: attributeName ?? this.attributeName,
+      value: value ?? this.value,
+    );
+  }
 }

@@ -51,18 +51,14 @@ class _CategoryCardTabState extends State<CityTab> {
         ),
         Divider(height: AppDimens.sizeZero),
         SidebarBodyAction(
-          onSearch: (value) {},
+          searchReceptacle: SerachReceptacle(onSearch: (value) {}),
           onAdd: () => AppDialog.form(
             context: context,
             title: 'Tambah Kategori',
             content: const CityAddForm(),
           ),
-          onFilter: () => AppDialog.filter<bool>(
-            context: context,
-            title: 'Filter Kategori',
-            content: const CityFilterForm(),
-            onSubmitted: () {},
-            onReset: () {},
+          filterReceptacle: FilterReceptacle(
+            onFilter: () {}
           ),
           onImport: () => AppDialog.import(
             context: context,
@@ -92,7 +88,6 @@ class _CategoryCardTabState extends State<CityTab> {
                 // final DataGridRow row = cardDataSource.effectiveRows[details.rowColumnIndex.rowIndex - 1];
                 // int index = cardDataSource.dataGridRows.indexOf(row);
 
-               
               }
             },
             columnWidthMode: ColumnWidthMode.none,
@@ -116,7 +111,6 @@ class _CategoryCardTabState extends State<CityTab> {
         PagingTable(
           source: categoryDataSource,
           pageCount: categoryDataSource.orders.length / _rowsPerPage,
-
         ),
       ],
     );

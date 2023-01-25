@@ -12,7 +12,7 @@ class TableDataEntity<T> extends Equatable {
   @override
   List<Object> get props => [rows, totalRows];
 
-  TableDataEntity get empty => TableDataEntity<T>(rows: const [], totalRows: 0);
+  factory TableDataEntity.empty() => TableDataEntity<T>(rows: const [], totalRows: 0);
 
   factory TableDataEntity.fromMap(Map<String, dynamic> map, Function(List data) f) {
     return TableDataEntity(

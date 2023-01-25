@@ -10,6 +10,7 @@ class SidebarBodyProfile extends StatelessWidget {
   final String role;
   final List<ProfileTile> listContents;
   final void Function() onLogout;
+  final void Function()? onEdit;
 
   const SidebarBodyProfile({
     super.key,
@@ -18,6 +19,7 @@ class SidebarBodyProfile extends StatelessWidget {
     required this.listContents,
     required this.role,
     required this.onLogout,
+    this.onEdit,
   });
 
   @override
@@ -38,6 +40,7 @@ class SidebarBodyProfile extends StatelessWidget {
           listContents: listContents,
           role: role,
           onLogout: onLogout,
+          onEdit: onEdit,
         ),
       ),
       focusColor: AppColors.transparent,
@@ -80,7 +83,7 @@ class SidebarBodyProfile extends StatelessWidget {
                     chipType: ChipType.light,
                     color: AppUtils.roleColor(role),
                     value: role,
-                    fontSize: 9.0,
+                    fontSize: 10.0,
                   ),
                 ),
               ],
@@ -164,6 +167,7 @@ class _PopDetailProfile extends StatelessWidget {
   final String name;
   final String? role;
   final void Function() onLogout;
+  final void Function()? onEdit;
 
   const _PopDetailProfile({
     required this.imageUrl,
@@ -171,6 +175,7 @@ class _PopDetailProfile extends StatelessWidget {
     required this.listContents,
     required this.role,
     required this.onLogout,
+    this.onEdit,
   });
 
   @override
@@ -187,15 +192,19 @@ class _PopDetailProfile extends StatelessWidget {
           Positioned(
             right: AppDimens.sizeM,
             top: AppDimens.sizeM,
-            child: IconButton(
-              onPressed: () {
-                SmartDialog.dismiss();
-              },
-              icon: const Icon(Icons.edit),
-              color: AppColors.labelSecondary,
-              splashRadius: AppDimens.size2M,
-              iconSize: AppDimens.size4M,
-              padding: EdgeInsets.all(AppDimens.sizeZero),
+            child: Offstage(
+              offstage: onEdit == null,
+              child: IconButton(
+                onPressed: () {
+                  onEdit!();
+                  SmartDialog.dismiss();
+                },
+                icon: const Icon(Icons.edit),
+                color: AppColors.labelSecondary,
+                splashRadius: AppDimens.size2M,
+                iconSize: AppDimens.size4M,
+                padding: EdgeInsets.all(AppDimens.sizeZero),
+              ),
             ),
           ),
           Padding(

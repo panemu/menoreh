@@ -20,4 +20,16 @@ class CountryParamsEntity extends Equatable {
 
   @override
   bool get stringify => true;
+
+  CountryParamsEntity copyWith({
+    int? start,
+    int? max,
+    TableQueryEntity? tableQuery,
+  }) {
+    return CountryParamsEntity(
+      start: start ?? this.start,
+      max: max ?? this.max,
+      tableQuery: tableQuery ?? this.tableQuery,
+    );
+  }
 }

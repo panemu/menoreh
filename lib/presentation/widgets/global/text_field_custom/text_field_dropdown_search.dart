@@ -12,6 +12,7 @@ class TextFieldDropdownSearch<T> extends StatelessWidget {
   final T? selectedItem;
   final String? hint;
   final bool Function(T?)? itemDisabledFn;
+  final String? Function(T?)? validator;
 
   const TextFieldDropdownSearch({
     Key? key,
@@ -24,6 +25,7 @@ class TextFieldDropdownSearch<T> extends StatelessWidget {
     this.itemDisabledFn,
     this.selectedItem,
     this.hint,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -41,6 +43,8 @@ class TextFieldDropdownSearch<T> extends StatelessWidget {
           compareFn: (item, selectedItem) => compareFn!(item!, selectedItem),
           asyncItems: (text) => Future.value([]),
           selectedItem: selectedItem,
+          validator: validator,
+          autoValidateMode: AutovalidateMode.onUserInteraction,
           popupProps: PopupProps.menu(
             showSelectedItems: true,
             showSearchBox: true,

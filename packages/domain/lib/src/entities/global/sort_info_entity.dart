@@ -18,4 +18,14 @@ class SortingInfoEntity extends Equatable {
       'direction': direction,
     };
   }
+
+  SortingInfoEntity copyWith({
+    String? attributeName,
+    String? direction,
+  }) {
+    return SortingInfoEntity(
+      attributeName: attributeName ?? this.attributeName,
+      direction: direction ?? this.direction,
+    );
+  }
 }

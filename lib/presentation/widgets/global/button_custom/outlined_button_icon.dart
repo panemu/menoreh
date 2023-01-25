@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:menoreh_library/core/_core.dart';
 
 class OutlinedButtonIcon extends StatelessWidget {
-  final Icon icon;
+  final Widget icon;
   final VoidCallback? onPressed;
 
   /// default color is [AppColors.labelSecondary]

@@ -14,7 +14,7 @@ const String BOX_KEY_LOGIN = 'box_key_login';
 
 //! Failure Messages
 const String FAILURE_UNKNOWN = 'Something went wrong';
-const String FAILURE_NOT_FOUND = 'Data is Empty';
+const String FAILURE_NOT_FOUND = 'No data to display';
 
 //! Exception Messages
 const String EXCEPTION_CANCEL = 'Request to API server was cancelled';
@@ -25,6 +25,7 @@ const String EXCEPTION_OTHER = 'Connection to API server failed due to internet 
 const String EXCEPTION_UNKNOWN = 'Connection to API server failed due to internet connection';
 const String EXCEPTION_BAD_REQ = 'Bad request ';
 const String EXCEPTION_NOT_FOUND = 'Not Found';
+const String EXCEPTION_METHOD = 'Method not allowed';
 const String EXCEPTION_ISE = 'Internal server error';
 const String EXCEPTION_WRONG = 'Something went wrong';
 

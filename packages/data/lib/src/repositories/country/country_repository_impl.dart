@@ -12,6 +12,8 @@ class CountryRepositoryImpl extends CountryRepository {
     try {
       TableDataEntity<CountryEntity> data = await remoteDatasource.getCountry(params);
 
+      if (data.totalRows == 0) return Left(NotFoundFailure());
+
       return Right(data);
     } catch (e) {
       if (e is ServerException) {
@@ -39,7 +41,7 @@ class CountryRepositoryImpl extends CountryRepository {
 
   @override
   Future<Either<Failure, bool>> postCountry(CountryRequestEntity request) async {
-      try {
+    try {
       bool data = await remoteDatasource.postCountry(request);
 
       return Right(data);
@@ -54,7 +56,7 @@ class CountryRepositoryImpl extends CountryRepository {
 
   @override
   Future<Either<Failure, bool>> putCountry(CountryRequestEntity request) async {
-      try {
+    try {
       bool data = await remoteDatasource.putCountry(request);
 
       return Right(data);
@@ -69,7 +71,7 @@ class CountryRepositoryImpl extends CountryRepository {
 
   @override
   Future<Either<Failure, bool>> deleteCountry(int request) async {
-      try {
+    try {
       bool data = await remoteDatasource.deleteCountry(request);
 
       return Right(data);

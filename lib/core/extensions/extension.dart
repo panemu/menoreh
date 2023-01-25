@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -7,14 +7,14 @@ import 'package:menoreh_library/core/_core.dart';
 
 extension DateTimeExtension on DateTime {
   /// For [DateTime] formatting and return as [String]
-  /// e.g `12 Agu 2022`
+  /// e.g `2022-10-01` convert to `12 Agu 2022`
   String get yMMMd {
     DateFormat formattor = DateFormat('dd MMM yyyy', 'id');
     return formattor.format(this);
   }
 
   /// For [DateTime] formatting and return as [String]
-  /// e.g `12 January 2022`
+  /// e.g `2022-10-01` convert to `12 January 2022`
   String get yMMMMd {
     DateFormat formattor = DateFormat('dd MMMM yyyy', 'id');
     return formattor.format(this);
@@ -55,12 +55,17 @@ extension StringExtension on String {
     return inputFormat.parse(this);
   }
 
+  /// currency convert to number
+  /// e.g String `12 Agustus 2022 4:23 PM` convert to int `2022-10-01`
+  /// e.g String `12 Ags 2022 4:23 PM` convert to int `2022-10-01`
+  String get textDateTimeOnly => DateFormat('yyyy-MM-dd').format(DateFormat('dd MMMM yyyy', 'id').parse(this));
+
   /// for [String] formating to result as `Flutter is very good`
   String get capitalize => '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
 
-  /// String to currency number
-  /// e.g `20,000` convert to `20000`
-  String get numberDigitOnly => replaceAll(",", "");
+  /// currency convert to number
+  /// e.g String `20,000` convert to int `20000`
+  int get numberDigitOnly => int.parse(replaceAll(".", ""));
 }
 
 extension SuffixTypeExtension on SuffixType {
@@ -105,6 +110,14 @@ extension BuildContextExtension on BuildContext {
   }
 
   double get maxHeightDialogDetail => height / 1.2;
+
+  double get topSafeArea => MediaQuery.of(this).padding.top;
+
+  double get heightAppBar => responsiveValue<double>(
+        desktop: AppDimens.appBarHeight,
+        tablet: AppDimens.appBarHeight,
+        mobile: kIsWeb ? AppDimens.size8X : AppDimens.appBarHeightM,
+      );
 }
 
 //! ENUM
@@ -138,8 +151,19 @@ extension AuthStateEnum on AuthState {
   bool get isNotLoggedIn => this == AuthState.notLoggedIn;
 }
 
+extension AnswerStateEnum on AnswerState {
+  bool get isCancel => this == AnswerState.cancel;
+  bool get isYesOk => this == AnswerState.yesOk;
+  bool get isThird => this == AnswerState.third;
+}
+
 extension DatailDialogStateEnum on DatailDialogState {
   bool get isClose => this == DatailDialogState.close;
   bool get isEdit => this == DatailDialogState.edit;
   bool get isDelete => this == DatailDialogState.delete;
+}
+
+extension BadgeTypeEnum on BadgeType {
+  bool get isNumber => this == BadgeType.number;
+  bool get isDot => this == BadgeType.dot;
 }

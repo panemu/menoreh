@@ -50,15 +50,17 @@ class _ListUsersTabState extends State<ListUsersTab> {
         ),
         Divider(height: AppDimens.sizeZero),
         SidebarBodyAction(
-          onSearch: (value) {},
-          onFilter: () => AppDialog.filter<bool>(
-            context: context,
-            heightReduce: AppDimens.size8X,
-            title: 'Filter daftar user',
-            content: const ListUsersFilterForm(),
-            onSubmitted: () {},
-            onReset: () {},
-          ),
+          searchReceptacle: SerachReceptacle(onSearch: (value) {}),
+          // filterReceptacle: FilterReceptacle(
+          //   onFilter: () => AppDialog.filter<bool>(
+          //     context: context,
+          //     heightReduce: AppDimens.size8X,
+          //     title: 'Filter daftar user',
+          //     content: const ListUsersFilterForm(),
+          //     onSubmitted: () {},
+          //     onReset: () {},
+          //   ),
+          // ),
           onExport: () => AppDialog.confirm(
             context: context,
             title: 'Export daftar user',
@@ -76,7 +78,6 @@ class _ListUsersTabState extends State<ListUsersTab> {
                 // final DataGridRow row = listUsersDataSource.effectiveRows[details.rowColumnIndex.rowIndex - 1];
                 // int index = listUsersDataSource.dataGridRows.indexOf(row);
 
-                
               }
             },
             columns: <GridColumn>[

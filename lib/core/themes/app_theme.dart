@@ -117,10 +117,19 @@ class AppTheme {
           borderSide: const BorderSide(color: AppColors.secondary, width: 1.5),
           borderRadius: BorderRadius.circular(AppDimens.radiusMedium),
         ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: AppColors.red, width: 1),
+          borderRadius: BorderRadius.circular(AppDimens.radiusMedium),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: AppColors.red, width: 1.5),
+          borderRadius: BorderRadius.circular(AppDimens.radiusMedium),
+        ),
         hintStyle: TextStyle(color: AppColors.grey.shade500),
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
         contentPadding: const EdgeInsets.all(AppDimens.paddingMedium),
+        errorStyle: const TextStyle(color: AppColors.red),
       ),
     );
   }

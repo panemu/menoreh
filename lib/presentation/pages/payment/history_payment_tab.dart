@@ -45,15 +45,17 @@ class _HistoryPaymentTabState extends State<HistoryPaymentTab> {
         ),
         Divider(height: AppDimens.sizeZero),
         SidebarBodyAction(
-          onSearch: (value) {},
-          onFilter: () => AppDialog.filter<bool>(
-            context: context,
-            title: 'Filter paket',
-            heightReduce: AppDimens.size8X,
-            content: const HistoryPaymentFilterForm(),
-            onSubmitted: () {},
-            onReset: () {},
-          ),
+          searchReceptacle: SerachReceptacle(onSearch: (value) {}),
+          // filterReceptacle: FilterReceptacle(
+          //   onFilter: () => AppDialog.filter<bool>(
+          //     context: context,
+          //     title: 'Filter paket',
+          //     heightReduce: AppDimens.size8X,
+          //     content: const HistoryPaymentFilterForm(),
+          //     onSubmitted: () {},
+          //     onReset: () {},
+          //   ),
+          // ),
           dropdownButton: DateRangeButton<String>(
             items: const ['Minggu ini', 'Bulan ini', 'Tahun ini'],
             onChanged: (value) {},
@@ -76,7 +78,6 @@ class _HistoryPaymentTabState extends State<HistoryPaymentTab> {
                 // final DataGridRow row = cardDataSource.effectiveRows[details.rowColumnIndex.rowIndex - 1];
                 // int index = cardDataSource.dataGridRows.indexOf(row);
 
-                
               }
             },
             columnWidthMode: ColumnWidthMode.auto,

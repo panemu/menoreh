@@ -6,12 +6,9 @@ import 'package:menoreh_library/presentation/_presentation.dart';
 
 class SidebarBodyAction extends StatelessWidget {
   final String? title;
-
-  /// hit of search is `Cari sesuatu`
-  final String? searchHint;
-  final void Function(String value)? onSearch;
+  final SerachReceptacle? searchReceptacle;
   final Widget? dropdownButton;
-  final VoidCallback? onFilter;
+  final FilterReceptacle? filterReceptacle;
   final VoidCallback? onAdd;
   final VoidCallback? onExport;
   final VoidCallback? onImport;
@@ -19,9 +16,8 @@ class SidebarBodyAction extends StatelessWidget {
   const SidebarBodyAction({
     super.key,
     this.title,
-    this.onSearch,
-    this.onFilter,
-    this.searchHint = 'Cari sesuatu',
+    this.searchReceptacle,
+    this.filterReceptacle,
     this.dropdownButton,
     this.onAdd,
     this.onExport,
@@ -43,12 +39,12 @@ class SidebarBodyAction extends StatelessWidget {
       }
 
       //! search
-      if (onSearch != null) {
+      if (searchReceptacle != null) {
         listLeft.add(
           Expanded(
             child: TextFieldSearch(
-              onChanged: onSearch,
-              hint: searchHint!,
+              onChanged: searchReceptacle!.onSearch,
+              hint: searchReceptacle!.hint!,
             ),
           ),
         );
@@ -65,7 +61,7 @@ class SidebarBodyAction extends StatelessWidget {
       }
 
       //! fliter
-      if (onFilter != null) {
+      if (filterReceptacle != null) {
         listLeft.add(const SizedBox(width: AppDimens.paddingMedium));
         listLeft.add(
           OutlinedButtonIcon(
@@ -79,7 +75,8 @@ class SidebarBodyAction extends StatelessWidget {
                 useAnimation: false,
                 debounce: true,
                 targetBuilder: (targetOffset, targetSize) => Offset(targetOffset.dx - 100, targetOffset.dy - 24),
-                builder: (_) => _PopupMenu(onImport: onImport, onExport: onExport, onFilter: onFilter!),
+                builder: (_) =>
+                    _PopupMenu(onImport: onImport, onExport: onExport, onFilter: filterReceptacle!.onFilter),
               );
             },
             icon: const Icon(Icons.more_vert_outlined),
@@ -110,26 +107,30 @@ class SidebarBodyAction extends StatelessWidget {
       }
 
       //! search
-      if (onSearch != null) {
+      if (searchReceptacle != null) {
         listLeft.addAll([
           SizedBox(
             width: context.isLargeTablet ? AppDimens.fieldSearch : AppDimens.fieldSearchTablet,
             child: TextFieldSearch(
-              onChanged: onSearch,
-              hint: searchHint!,
+              onChanged: searchReceptacle!.onSearch,
+              hint: searchReceptacle!.hint!,
             ),
           ),
         ]);
       }
 
       //! filter
-      if (onFilter != null) {
+      if (filterReceptacle != null) {
         listLeft.addAll([
           const SizedBox(width: AppDimens.paddingMedium),
           OutlinedButtonIcon(
-            onPressed: onFilter,
-            icon: const Icon(Icons.filter_list),
-            tooltip: 'Filter',
+            onPressed: filterReceptacle!.onFilter,
+            icon: BadgeNotification(
+              isActive: filterReceptacle!.isActive!,
+              icon: const Icon(Icons.filter_list),
+            ),
+            tooltip: filterReceptacle!.tooltip!,
+            color: filterReceptacle!.isActive! ? AppColors.secondary : null,
           ),
         ]);
       }
@@ -273,4 +274,20 @@ class _PopupMenu extends StatelessWidget {
       ),
     );
   }
+}
+
+class SerachReceptacle {
+  /// hit of search is `Search for someting`
+  final String? hint;
+  final void Function(String value) onSearch;
+
+  SerachReceptacle({this.hint = 'Search for someting', required this.onSearch});
+}
+
+class FilterReceptacle {
+  final bool? isActive;
+  final VoidCallback onFilter;
+  final String? tooltip;
+
+  FilterReceptacle({this.isActive = false, this.tooltip = 'Filter', required this.onFilter});
 }

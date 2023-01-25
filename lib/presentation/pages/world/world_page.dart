@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/src/extensions/context_extensions.dart';
 import 'package:menoreh_library/core/_core.dart';
 import 'package:menoreh_library/presentation/_presentation.dart';
 
@@ -39,11 +38,7 @@ class WorldPage extends StatelessWidget {
                   backgroundColor: AppColors.grey.shade50,
                 ),
               ],
-              height: context.responsiveValue<double>(
-                desktop: AppDimens.appBarHeight,
-                tablet: AppDimens.appBarHeight,
-                mobile: AppDimens.appBarHeightM,
-              ),
+              height: context.heightAppBar,
             ),
             body: child,
           ),

@@ -42,9 +42,9 @@ void _bloc() {
   // Country
   sl.registerFactory<CountryCubit>(() => CountryCubit(sl()));
   sl.registerFactory<CountryByIdCubit>(() => CountryByIdCubit(sl()));
-  sl.registerFactory<CountryPost>(() => CountryPost(sl()));
-  sl.registerFactory<CountryPut>(() => CountryPut(sl()));
-  sl.registerFactory<CountryDelete>(() => CountryDelete(sl()));
+  sl.registerFactory<CountryPostCubit>(() => CountryPostCubit(sl()));
+  sl.registerFactory<CountryPutCubit>(() => CountryPutCubit(sl()));
+  sl.registerFactory<CountryDeleteCubit>(() => CountryDeleteCubit(sl()));
 }
 
 void _useCase() {

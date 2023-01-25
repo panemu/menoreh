@@ -25,14 +25,16 @@ class _LogUsersTabState extends State<LogUsersTab> {
     return Column(
       children: <Widget>[
         SidebarBodyAction(
-          onSearch: (value) {},
-          onFilter: () => AppDialog.filter<bool>(
-            context: context,
-            title: 'Filter log user',
-            content: const LogUsersFilterForm(),
-            onSubmitted: () {},
-            onReset: () {},
-          ),
+          searchReceptacle: SerachReceptacle(onSearch: (value) {}),
+          // filterReceptacle: FilterReceptacle(
+          //   onFilter: () => AppDialog.filter<bool>(
+          //     context: context,
+          //     title: 'Filter log user',
+          //     content: const LogUsersFilterForm(),
+          //     onSubmitted: () {},
+          //     onReset: () {},
+          //   ),
+          // ),
           onExport: () => AppDialog.confirm(
             context: context,
             title: 'Export log user',

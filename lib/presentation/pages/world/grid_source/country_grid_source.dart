@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -46,7 +44,6 @@ class CountryGridSource extends DataGridSource {
 
   @override
   Future<bool> handlePageChange(int oldPageIndex, int newPageIndex) async {
-    log('Handle PageChange called and  oldPageIndex: $oldPageIndex  newPageIndex: $newPageIndex');
 
     int startIndex = newPageIndex * _rowsPerPage;
     int endIndex = startIndex + _rowsPerPage;
@@ -68,9 +65,9 @@ class CountryGridSource extends DataGridSource {
   @override
   DataGridRowAdapter buildRow(DataGridRow row) {
     final int rowIndex = gridRows.indexOf(row);
-    Color backgroundColor = AppColors.white;
+    Color backgroundColor = AppColors.rowTable;
     if ((rowIndex % 2) == 0) {
-      backgroundColor = AppColors.rowTable;
+      backgroundColor = AppColors.white;
     }
 
     return DataGridRowAdapter(

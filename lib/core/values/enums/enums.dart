@@ -30,3 +30,6 @@ enum AnswerState { cancel, yesOk, third }
 
 /// state of detail dialog
 enum DatailDialogState { close, edit, delete }
+
+// state of badge notification
+enum BadgeType { number, dot }

@@ -41,12 +41,12 @@ class AppUtils {
 
   static Color roleColor(String name) {
     switch (name.toLowerCase()) {
-      case 'admin' : 
-      return AppColors.purple;
+      case 'admin':
+        return AppColors.purple;
       case 'read':
-      return AppColors.green;
+        return AppColors.green;
       default:
-      return AppColors.blue;
+        return AppColors.blue;
     }
   }
 
@@ -71,4 +71,15 @@ class AppUtils {
         return allowedExtensions!.fold('', (prev, next) => '${prev.isEmpty ? '' : '$prev,'} .$next');
     }
   }
+
+  static const List<String> continentList = [
+    'Asia',
+    'Europe',
+    'Africa',
+    'Oceania',
+    'North America',
+    'Antarctica',
+    'South America',
+    'Australia'
+  ];
 }

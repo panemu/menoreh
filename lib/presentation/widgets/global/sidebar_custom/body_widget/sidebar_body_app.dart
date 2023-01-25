@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_utils/get_utils.dart';
@@ -60,7 +61,7 @@ class _Layout extends StatelessWidget {
         decoration: const BoxDecoration(
           border: Border(bottom: BorderSide(color: AppColors.dividerLight)),
         ),
-        alignment: Alignment.centerLeft,
+        alignment: (tabBar != null) ? Alignment.bottomLeft : Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,59 +77,57 @@ class _Layout extends StatelessWidget {
           ],
         ),
       ),
-      mobile: SafeArea(
-        top: true,
-        child: Container(
-          color: AppColors.white,
-          alignment: Alignment.centerLeft,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  left: AppDimens.paddingMediumX,
-                  right: AppDimens.paddingMediumX,
-                  top: (tabBar != null) ? AppDimens.paddingSmallX : AppDimens.sizeZero,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          AppImages.logoSvg,
-                          width: AppDimens.size4L,
-                          height: AppDimens.size4L,
-                        ),
-                        SizedBox(width: AppDimens.size3M),
-                        title,
-                      ],
-                    ),
-                    _ActionLayout(action: action!, profile: profile!),
-                  ],
-                ),
+      mobile: Container(
+        color: AppColors.white,
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.only(top: kIsWeb ? 0 : context.topSafeArea),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                left: AppDimens.paddingMediumX,
+                right: AppDimens.paddingMediumX,
+                top: (tabBar != null) ? AppDimens.paddingSmallX : AppDimens.sizeZero,
               ),
-              if (tabBar != null)
-                Theme(
-                  data: ThemeData(
-                    tabBarTheme: const TabBarTheme(
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      unselectedLabelColor: AppColors.labelPrimary,
-                      labelColor: AppColors.secondary,
-                      indicator: UnderlineTabIndicator(
-                        borderSide: BorderSide(
-                          width: 2.0,
-                          color: AppColors.secondary,
-                        ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        AppImages.logoSvg,
+                        width: AppDimens.size4L,
+                        height: AppDimens.size4L,
+                      ),
+                      SizedBox(width: AppDimens.size3M),
+                      title,
+                    ],
+                  ),
+                  _ActionLayout(action: action!, profile: profile!),
+                ],
+              ),
+            ),
+            if (tabBar != null)
+              Theme(
+                data: ThemeData(
+                  tabBarTheme: const TabBarTheme(
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    unselectedLabelColor: AppColors.labelPrimary,
+                    labelColor: AppColors.secondary,
+                    indicator: UnderlineTabIndicator(
+                      borderSide: BorderSide(
+                        width: 2.0,
+                        color: AppColors.secondary,
                       ),
                     ),
                   ),
-                  child: tabBar!,
                 ),
-            ],
-          ),
+                child: tabBar!,
+              ),
+          ],
         ),
       ),
     );

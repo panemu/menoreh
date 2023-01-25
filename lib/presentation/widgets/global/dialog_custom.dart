@@ -19,6 +19,13 @@ class AppDialog {
         labelCancel: '',
       );
 
+  static Future<AnswerState?> export(BuildContext context, {String? description}) => confirm(
+        context: context,
+        title: "Export",
+        description: description ?? 'For export this data please click Export.',
+        labelYesOk: 'Export',
+      );
+
   static Future<AnswerState?> confirm({
     required BuildContext context,
     String? title = 'Info',
@@ -182,119 +189,31 @@ class AppDialog {
     );
   }
 
-  static Future<T?> filter<T>({
+  static Future<AnswerState?> filter({
     required BuildContext context,
-    required String title,
     required Widget content,
-    bool? isDismiss = true,
-    double? heightReduce = 0,
-    required VoidCallback? onSubmitted,
-    required VoidCallback? onReset,
-    VoidCallback? onBack,
+    String? title = 'Filter',
+    bool? isDismiss = false,
+    bool? isScrollable = false,
   }) {
-    late List<Widget> structure = [];
-    late List<Widget> action = [];
-
-    structure.addAll([Text(title, style: AppTextStyle.dialogTitle), SizedBox(height: AppDimens.size3M)]);
-
-    action.addAll([
-      ElevatedButton(
-        onPressed: () {
-          context.router.pop();
-          onBack!.call();
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.fillTertiary,
-          foregroundColor: AppColors.labelSecondary,
-        ),
-        child: const Text('Batal'),
-      ),
-      SizedBox(width: AppDimens.size2M),
-      ElevatedButton(
-        onPressed: () => onSubmitted!.call(),
-        child: const Text('Terapkan'),
-      ),
-    ]);
-
-    return showDialog<T>(
+    return form(
       context: context,
-      barrierDismissible: isDismiss!,
-      builder: (context) {
-        return Dialog(
-          insetPadding: EdgeInsets.symmetric(horizontal: AppDimens.sizeXL, vertical: AppDimens.sizeL),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimens.radiusLargeX)),
-          child: Container(
-            width: context.maxWidthDialog,
-            height: context.maxHeightDialogDetail - heightReduce!,
-            padding: EdgeInsets.symmetric(horizontal: AppDimens.sizeXL, vertical: AppDimens.size2L),
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (var i = 0; i < structure.length; i++) structure[i],
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: content,
-                  ),
-                ),
-                SizedBox(height: AppDimens.size2L),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    OutlinedButton(
-                      onPressed: () => onReset!.call(),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: AppColors.red,
-                        side: const BorderSide(color: AppColors.red),
-                      ),
-                      child: const Text('Reset Filter'),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: action,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+      title: title!,
+      content: content,
+      isScrollable: isScrollable,
+      isDismiss: isDismiss,
     );
   }
 
   static Future<AnswerState?> form({
     required BuildContext context,
     required String title,
-    required Widget content,
     bool? isDismiss = false,
-    String? labelYesOk = 'Save',
-    String? labelCancel = 'Cancel',
     bool? isScrollable = false,
+
+    /// Please use widget `ContentDialogForm`
+    required Widget content,
   }) {
-    late List<Widget> structure = [];
-    late List<Widget> action = [];
-
-    structure.addAll([Text(title, style: AppTextStyle.dialogTitle), SizedBox(height: AppDimens.size3M)]);
-
-    action.addAll([
-      ElevatedButton(
-        onPressed: () => context.router.pop<AnswerState>(AnswerState.cancel),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.fillTertiary,
-          foregroundColor: AppColors.labelSecondary,
-        ),
-        child: Text(labelCancel!),
-      ),
-      SizedBox(width: AppDimens.size2M),
-      ElevatedButton(
-        onPressed: () => () => context.router.pop<AnswerState>(AnswerState.yesOk),
-        child: Text(labelYesOk!),
-      ),
-    ]);
-
     return showDialog<AnswerState>(
       context: context,
       barrierDismissible: isDismiss!,
@@ -320,19 +239,9 @@ class AppDialog {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  for (var i = 0; i < structure.length; i++) structure[i],
-                  Expanded(
-                    flex: isScrollable ? 1 : 0,
-                    child: SingleChildScrollView(
-                      child: content,
-                    ),
-                  ),
-                  SizedBox(height: AppDimens.size2L),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: action,
-                  ),
+                  Text(title, style: AppTextStyle.dialogTitle),
+                  SizedBox(height: AppDimens.size3M),
+                  content,
                 ],
               ),
             ),
@@ -454,4 +363,12 @@ class AppDialog {
       },
     );
   }
+}
+
+class ContentForm {
+  final Widget content;
+  final void Function()? onYesOk;
+  final void Function()? cancel;
+
+  ContentForm(this.content, this.onYesOk, this.cancel);
 }

@@ -18,6 +18,13 @@ class AppTextStyle {
         fontWeight: FontWeight.w500,
       );
 
+  /// card title `fsize: 18, color: labelPrimary, weight: semi-bold`
+  static TextStyle get cardValue => const TextStyle(
+        color: AppColors.labelPrimary,
+        fontSize: 18.0,
+        fontWeight: FontWeight.w600,
+      );
+
   /// card title `fsize: 20.0, color: labelPrimary, weight: semi-bold`
   static TextStyle get titleDrawer => const TextStyle(
         color: AppColors.white,

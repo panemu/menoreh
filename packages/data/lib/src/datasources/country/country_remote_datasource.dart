@@ -26,7 +26,7 @@ class CountryRemoteDatasourceImpl implements CountryRemoteDatasource {
   CountryRemoteDatasourceImpl(this.baseApi);
 
   @override
-  Future<TableDataEntity<CountryEntity>> getCountry(CountryParamsEntity params) async {
+  Future<TableDataEntity<CountryEntity>> getCountry(CountryParamsEntity params) async {    
     try {
       final map = await baseApi.post(
         '$COUNTRY?start=${params.start}&max=${params.max}',
@@ -62,13 +62,13 @@ class CountryRemoteDatasourceImpl implements CountryRemoteDatasource {
 
   @override
   Future<bool> postCountry(CountryRequestEntity request) async {
-    await baseApi.post(COUNTRY, data: request.toJson());
+    await baseApi.put('$COUNTRY/${request.id}', data: request.toPostJson());
     return true;
   }
 
   @override
   Future<bool> putCountry(CountryRequestEntity request) async {
-    await baseApi.put(COUNTRY, data: request.toJson());
+    await baseApi.put('$COUNTRY/${request.id}', data: request.toPutJson());
     return true;
   }
 

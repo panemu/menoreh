@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:menoreh_library/core/_core.dart';
+import 'package:menoreh_library/presentation/_presentation.dart';
 
 class SidebarBodyCard extends StatelessWidget {
   final List<ContentSidebarBodyCard> contents;
@@ -71,19 +72,31 @@ class _ContentBuilder extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Icon(
-            content[index].icon,
-            color: AppColors.secondary,
-            size: AppDimens.size4L,
-          ),
+          if (content[index].isLoading!)
+            ShimmerCustom(size: Size(AppDimens.size4L, AppDimens.size4L), radius: AppDimens.radiusMediumX)
+          else
+            Icon(
+              content[index].icon,
+              color: AppColors.secondary,
+              size: AppDimens.size4L,
+            ),
           SizedBox(width: AppDimens.sizeM),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(content[index].title, style: AppTextStyle.cardTitle),
+              if (content[index].isLoading!)
+                ShimmerCustom(size: Size(AppDimens.size8X, AppDimens.size2M))
+              else
+                Text(content[index].title, style: AppTextStyle.cardTitle),
               SizedBox(height: AppDimens.sizeS),
-              SelectableText(content[index].value, style: AppTextStyle.tableTitle),
+              if (content[index].isLoading!)
+                ShimmerCustom(size: Size(AppDimens.sizeXL, AppDimens.size3M))
+              else
+                SelectableText(
+                  content[index].value.isNotEmpty ? content[index].value : '-',
+                  style: AppTextStyle.cardValue,
+                ),
             ],
           )
         ],
@@ -96,12 +109,14 @@ class ContentSidebarBodyCard {
   final IconData icon;
   final String title;
   final String value;
+  final bool? isLoading;
   final VoidCallback? onTap;
 
   ContentSidebarBodyCard({
     required this.icon,
     required this.title,
     required this.value,
+    this.isLoading = false,
     this.onTap,
   });
 }

@@ -32,6 +32,8 @@ class ServerException implements Exception {
         throw ServerException(message: '$EXCEPTION_BAD_REQ ${error['msg']}');
       case 404:
         throw ServerException(message: EXCEPTION_NOT_FOUND);
+      case 405:
+        throw ServerException(message: EXCEPTION_METHOD);
       case 500:
         throw ServerException(message: EXCEPTION_ISE);
       default:

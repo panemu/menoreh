@@ -17,7 +17,29 @@ class CountryCubit extends Cubit<CountryState> {
 
     data.fold(
       (failure) => emit(state.copyWith(status: TypeState.notLoaded, errorMessage: failure.message)),
-      (value) => emit(state.copyWith(status: TypeState.loaded, countryEntity: value)),
+      (value) {
+        final lstPo  = <int>[];
+        final lstInd = <String>[];
+        _calculation(value, lstPo, lstInd);
+        
+        emit(state.copyWith(
+          status: TypeState.loaded,
+          countryEntity: value,
+          totalCountry: value.totalRows,
+          totalPopulation: lstPo.reduce((a, b) => a + b),
+          latestIndependence: lstInd.last,
+          earliestIndependence: lstInd.first,
+        ));
+      },
     );
+  }
+
+  void _calculation(TableDataEntity<CountryEntity> value, List<int> lstPo, List<String> lstInd) {
+    for (var i = 0; i < value.rows.length; i++) {
+      lstPo.add(value.rows[i].population);
+      lstInd.add(value.rows[i].independence);
+    }
+    
+    lstInd.sort((a,b) => a.compareTo(b));
   }
 }
